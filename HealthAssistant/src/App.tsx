@@ -1,13 +1,16 @@
 
 import './App.css'
+import { Footer } from './components/HeaderAndFooter/Footer'
+import { Header } from './components/HeaderAndFooter/Header'
 
 function App() {
   
 
   return (
-    <>
-      <p>teste</p>
-    </>
+    <div>
+      <Header />
+      <Footer />
+    </div>
   )
 }
 
