@@ -1,7 +1,7 @@
 
 import './App.css'
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
+import { Footer } from "./components/Footer/footer";
+import { Header } from "./components/Header/header";
 
 function App() {
   
