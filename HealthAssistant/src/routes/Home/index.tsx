@@ -1,24 +1,32 @@
 import { Link } from "react-router-dom";
 import Links from "../../components/Links/Links";
+import teleconsultaIcon from "../../img/teleconsulta.png";
+import agendarIcon from "../../img/agendar.png";
+import agendaIcon from "../../img/agenda.png";
+import resultadosIcon from "../../img/resultados.png";
 
 export default function Home() {
   
   return (
-    <div className="bg-[#2196c9] min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col justify-center items-center gap-6">
-        <Link className=" w-56 py-4 rounded-lg border-none bg-[#eaeaea] text-[#1976a5] font-semibold text-lg" to="/teleconsulta">
+    <div className="home-bg">
+      <div className="home-content">
+        <Link className="home-link" to="/teleconsulta">
+          <img src={teleconsultaIcon} alt="Teleconsulta" className="home-icon" />
           Teleconsulta
         </Link>
 
-        <Link className="w-56 py-4 rounded-lg border-none bg-[#eaeaea] text-[#1976a5] font-semibold text-lg" to="/agendar">
+        <Link className="home-link" to="/agendar">
+          <img src={agendarIcon} alt="Agendar" className="home-icon" />
           Agendar
         </Link>
 
-        <Link className="w-56 py-4 rounded-lg border-none bg-[#eaeaea] text-[#1976a5] font-semibold text-lg" to="/agendamentos">
+        <Link className="home-link" to="/agendamentos">
+          <img src={agendaIcon} alt="Agendamentos" className="home-icon" />
           Agendamentos
         </Link>
 
-        <Link className="w-56 py-4 rounded-lg border-none bg-[#eaeaea] text-[#1976a5] font-semibold text-lg" to="/resultados">
+        <Link className="home-link" to="/resultados">
+          <img src={resultadosIcon} alt="Resultados" className="home-icon" />
           Resultados
         </Link>
       </div>
