@@ -19,6 +19,43 @@
     }
     
     /* ----------------- */
+    /* Quem Somos        */
+    /* ----------------- */
+    .quemsomos-bg {
+      @apply bg-[#2196c9] min-h-screen flex flex-col;
+    }
+    .quemsomos-banner {
+      @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
+    }
+    .quemsomos-back-btn {
+      @apply mr-2 text-2xl hover:text-[#1de9b6];
+    }
+    .quemsomos-title {
+      @apply text-xl font-semibold flex-1 text-center;
+    }
+    .quemsomos-content {
+      @apply flex-1 p-4 flex flex-col items-center;
+    }
+    .quemsomos-card {
+      @apply flex flex-col items-center justify-center bg-[#D9D9D9] text-[#222] mb-4 p-4 rounded-lg border-2 border-[#1976a5] max-w-2xl w-full;
+    }
+    .quemsomos-photo {
+      @apply w-24 h-24 rounded-full object-cover mb-3 border-2 border-white;
+    }
+    .quemsomos-name {
+      @apply block text-lg text-center;
+    }
+    .quemsomos-info {
+      @apply text-center;
+    }
+    .quemsomos-links {
+      @apply mt-2 flex gap-2 justify-center;
+    }
+    .quemsomos-link {
+      @apply underline hover:text-[#46a2da];
+    }
+    
+    /* ----------------- */
     /* FAQ               */
     /* ----------------- */
     .faq-bg {
