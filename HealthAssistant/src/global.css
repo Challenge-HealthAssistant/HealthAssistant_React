@@ -6,6 +6,19 @@
 
   @layer{
     /* ----------------- */
+    /* Bottom Links      */
+    /* ----------------- */
+    .bottom-links {
+      @apply flex justify-around bg-[#1de9b6] py-3;
+    }
+    .bottom-links-item {
+      @apply flex flex-col items-center gap-1 text-lg;
+    }
+    .bottom-links-icon {
+      @apply w-8 h-8;
+    }
+    
+    /* ----------------- */
     /* FAQ               */
     /* ----------------- */
     .faq-bg {
