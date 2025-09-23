@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function Agendamentos() {
   function handleVoltar() {
@@ -40,31 +41,12 @@ export default function Agendamentos() {
         </div>
       </div>
       <nav className="flex justify-around bg-[#03A9AA] py-3">
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Início")}
-        >
-          Início
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Quem somos")}
-        >
-          Quem somos
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Faq")}
-        >
-          Faq
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Suporte")}
-        >
-          Suporte
-        </button>
+        <Link className="bg-none border-none text-lg" to="/"> Início</Link>
+        <Link className="bg-none border-none text-lg" to="/quem-somos"> Quem somos</Link>
+        <Link className="bg-none border-none text-lg" to="/faq"> Faq</Link>
+        <Link className="bg-none border-none text-lg" to="/suporte"> Suporte</Link>
       </nav>
     </div>
   );
 }
+       

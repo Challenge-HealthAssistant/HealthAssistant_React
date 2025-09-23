@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 
 const team = [
   { name: "Pietro Paranhos Wilhelm", rm: "561378", group: "1TDSPH" },
@@ -29,10 +30,10 @@ export default function QuemSomos() {
         ))}
       </div>
       <nav className="flex justify-around bg-[#1de9b6] py-3">
-        <button className="bg-none border-none text-lg">Início</button>
-        <button className="bg-none border-none text-lg font-bold text-[#1976a5]">Quem somos</button>
-        <button className="bg-none border-none text-lg">Faq</button>
-        <button className="bg-none border-none text-lg">Suporte</button>
+        <Link className="bg-none border-none text-lg" to='/'>Início</Link>
+        <Link className="bg-none border-none text-lg" to='/quemsomos'>Quem somos</Link>
+        <Link className="bg-none border-none text-lg" to='/faq'>Faq</Link>
+        <Link className="bg-none border-none text-lg" to='/suporte'>Suporte</Link>
       </nav>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export default function Faq() {
   return (
@@ -40,10 +41,10 @@ export default function Faq() {
         </div>
       </div>
       <nav className="flex justify-around bg-[#1de9b6] py-3">
-        <button className="bg-none border-none text-lg">Início</button>
-        <button className="bg-none border-none text-lg">Quem somos</button>
-        <button className="bg-none border-none text-lg font-bold text-[#1976a5]">Faq</button>
-        <button className="bg-none border-none text-lg">Suporte</button>
+        <Link className="bg-none border-none text-lg" to="/">Início</Link>
+        <Link className="bg-none border-none text-lg" to="/quemsomos">Quem somos</Link>
+        <Link className="bg-none border-none text-lg" to="/faq">Faq</Link>
+        <Link className="bg-none border-none text-lg" to="/suporte">Suporte</Link>
       </nav>
     </div>
   );
