@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './global.css'
 import App from './App.tsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -13,6 +13,7 @@ import Login from './routes/Login/index.tsx'
 import LoginSenha from './routes/LoginComSenha/index.tsx'
 import QuemSomos from './routes/QuemSomos/index.tsx'
 import Agendar from './routes/Agendar/index.tsx'
+import Suporte from './routes/Suporte/index.tsx'
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
    {path: '/loginsenha', element: <LoginSenha />},
    {path: '/quemsomos', element: <QuemSomos />},
    {path: '/agendar', element: <Agendar />},
+   {path: '/suporte', element: <Suporte />},
   ]}
 ]);
 

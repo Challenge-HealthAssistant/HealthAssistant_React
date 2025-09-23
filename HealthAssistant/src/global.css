@@ -40,7 +40,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply bg-teal-500 p-3 flex justify-around text-white;
+  @apply bg-teal-400 p-3 flex justify-around text-white;
 }
 
 /* Ícones do footer */

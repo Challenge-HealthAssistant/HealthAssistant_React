@@ -1,5 +1,4 @@
 
-
 const resultados = [
   {
     ano: 2024,
