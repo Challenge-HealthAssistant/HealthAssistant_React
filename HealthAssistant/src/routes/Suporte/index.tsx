@@ -6,8 +6,7 @@ export default function Suporte() {
     return (
         <nav>
             <Menu />
-            <Links />
-        
+            <Links />            
         </nav>
     );
 }

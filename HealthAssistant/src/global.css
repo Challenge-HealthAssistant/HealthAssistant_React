@@ -17,6 +17,25 @@
     .bottom-links-icon {
       @apply w-8 h-8;
     }
+
+    /* ----------------- */
+    /* Header           */
+    /* ----------------- */
+    .header {
+      @apply flex items-center justify-between bg-white py-4 w-full px-4;
+    }
+    .header-logos {
+      @apply flex items-center gap-4;
+    }
+    .header-logo {
+      @apply h-8 sm:h-10 md:h-12 lg:h-14;
+    }
+    .header-profile {
+      @apply h-8 sm:h-10 md:h-12 lg:h-14;
+    }
+    
+
+
     
     /* ----------------- */
     /* Quem Somos        */
