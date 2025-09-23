@@ -1,17 +1,10 @@
-  /* ----------------- */
-  /* Banner Limit      */
-  /* ----------------- */
-  .banner-limit {
-    @apply max-w-xl mx-auto w-full;
-  }
-@import "tailwindcss";
+ @import "tailwindcss";
 
 :root {
   scroll-behavior: smooth;
 }
 
   @layer{
-   
     /* ----------------- */
     /* FAQ               */
     /* ----------------- */
@@ -30,6 +23,9 @@
     .faq-card {
       @apply bg-[#eaeaea] rounded-lg p-4 shadow;
     }
+    .banner-limit {
+      @apply max-w-3xl mx-auto w-full;
+    }
     .faq-card-title {
       @apply font-semibold text-[#1976a5] mb-1;
     }
@@ -43,6 +39,9 @@
       @apply font-semibold text-[#222] mb-2;
     }
     .faq-btn {
-      @apply w-full bg-[#2196c9] text-white font-semibold rounded-md py-2;
+      @apply w-full bg-[#2196c9] text-white font-semibold rounded-md py-2 flex items-center justify-center gap-2;
+    }
+    .faq-chatbot {
+      @apply w-8 h-8;
     }
   }

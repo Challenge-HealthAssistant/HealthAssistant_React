@@ -1,5 +1,6 @@
 import Links from "../../components/Links/Links";
 import { useNavigate } from "react-router-dom";
+import chatbot from "../../img/chatbot.png";
 
 export default function Faq() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Faq() {
         <h2 className="faq-title">FAQ</h2>
       </div>
       <div className="faq-content">
-        <div className="faq-card">
+        <div className="faq-card banner-limit">
           <div className="faq-card-title">
             Como eu recebo o lembrete da consulta?
           </div>
@@ -26,7 +27,7 @@ export default function Faq() {
           </div>
         </div>
 
-        <div className="faq-card">
+        <div className="faq-card banner-limit">
           <div className="faq-card-title">
             Preciso lembrar da senha?
           </div>
@@ -35,7 +36,7 @@ export default function Faq() {
           </div>
         </div>
       
-        <div className="faq-card">
+        <div className="faq-card banner-limit">
           <div className="faq-card-title">
             O sistema funciona em celular antigo?
           </div>
@@ -44,10 +45,11 @@ export default function Faq() {
           </div>
         </div>
 
-        <div className="faq-help-card">
+        <div className="faq-help-card banner-limit">
           <div className="faq-help-title">Precisa de ajuda?</div>
           <button className="faq-btn">
             Pergunte ao assistente
+            <img src={chatbot} alt="logo do chatbot" className="faq-chatbot" />
           </button>
         </div>
       </div>
