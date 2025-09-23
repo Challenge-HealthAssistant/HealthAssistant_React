@@ -9,7 +9,7 @@
     /* Global Classes    */
     /* ----------------- */
     .page-bg {
-      @apply bg-[#2196c9] min-h-[95vh] flex flex-col;
+      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
     }
     
     /* ----------------- */
@@ -53,7 +53,7 @@
     /* Home              */
     /* ----------------- */
     .home-bg {
-      @apply page-bg;
+      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
     }
     .home-content {
       @apply flex-1 flex flex-col justify-center items-center gap-2 sm:gap-3 p-2;
@@ -70,7 +70,7 @@
     /* Quem Somos        */
     /* ----------------- */
     .quemsomos-bg {
-      @apply page-bg;
+      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
     }
     .quemsomos-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
@@ -85,7 +85,7 @@
       @apply flex-1 p-4 flex flex-col items-center;
     }
     .quemsomos-card {
-      @apply flex flex-col items-center justify-center bg-[#D9D9D9] text-[#222] mb-4 p-3 rounded-lg border-2 border-[#1976a5] max-w-lg w-full;
+      @apply flex flex-col items-center justify-center bg-[#D9D9D9] text-[#222] mb-4 p-4 rounded-lg border-2 border-[#1976a5] max-w-2xl w-full;
     }
     .quemsomos-photo {
       @apply w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover mb-3 border-2 border-white;
@@ -107,7 +107,7 @@
     /* FAQ               */
     /* ----------------- */
     .faq-bg {
-      @apply page-bg;
+      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
     }
     .faq-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4 ;
@@ -141,5 +141,45 @@
     }
     .faq-chatbot {
       @apply w-8 h-8;
+    }
+    
+    /* ----------------- */
+    /* Agendar           */
+    /* ----------------- */
+    .agendar-bg {
+      @apply bg-[#2196c9] min-h-screen flex flex-col;
+    }
+    .agendar-banner {
+      @apply bg-[#1976a5] text-white m-0 py-3 text-center text-xl font-semibold lowercase;
+    }
+    .agendar-content {
+      @apply flex-1 p-6 flex flex-col items-center;
+    }
+    .agendar-subtitle {
+      @apply text-white font-bold mb-4 uppercase text-sm max-w-sm mx-auto text-center;
+    }
+    .agendar-cards-container {
+      @apply w-full max-w-sm sm:max-w-md mx-auto space-y-6;
+    }
+    .agendar-card {
+      @apply bg-[#eaeaea] rounded-lg p-4 w-full shadow-sm;
+    }
+    .agendar-card-title {
+      @apply text-[#1976a5] font-semibold mb-1 text-base;
+    }
+    .agendar-card-subtitle {
+      @apply text-[#222] text-sm mb-2 leading-relaxed;
+    }
+    .agendar-card-location {
+      @apply flex items-center gap-2 mb-3;
+    }
+    .agendar-card-location-text {
+      @apply text-[#888] text-xs;
+    }
+    .agendar-buttons {
+      @apply flex flex-col gap-2 w-full;
+    }
+    .agendar-btn {
+      @apply w-full py-2.5 px-4 rounded bg-white text-[#1976a5] font-semibold border-none hover:bg-gray-50 transition-colors cursor-pointer;
     }
   }
