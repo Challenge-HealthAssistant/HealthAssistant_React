@@ -59,7 +59,7 @@ export default function Cadastro() {
           className="w-full mb-4 p-2.5 rounded-md border-none bg-[#eaeaea] outline-none"
         />
         <button className="w-full p-2.5 rounded-md border-none bg-[#1de9b6] text-[#1976a5] font-semibold mb-4">
-          cadastrar
+          Cadastrar
         </button>
         <button className="w-full p-2.5 rounded-md border-none bg-[#1de9b6] text-[#1976a5] font-semibold">
           Voltar

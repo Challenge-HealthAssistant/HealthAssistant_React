@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* ----------------- */
+/* Padrões Globais    */
+/* ----------------- */
+body {
+  @apply bg-gray-100 text-gray-800 font-sans;
+}
+
+/* Container principal */
+.container-default {
+  @apply max-w-md mx-auto mt-6 bg-white rounded-xl shadow-lg p-6;
+}
+
+/* Títulos */
+.title-page {
+  @apply text-xl font-bold text-blue-700 text-center mb-4;
+}
+
+/* Inputs */
+.input-default {
+  @apply w-full border border-gray-300 rounded-lg p-2 
+  focus:ring-2 focus:ring-blue-500 focus:outline-none;
+}
+
+/* Botões principais */
+.btn-primary {
+  @apply w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition;
+}
+
+/* Botões secundários */
+.btn-secondary {
+  @apply w-full bg-gray-400 text-white py-2 rounded-lg hover:bg-gray-500 transition;
+}
+
+/* Botões de opção */
+.btn-option {
+  @apply flex-1 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition;
+}
+
+/* Footer */
+.footer {
+  @apply bg-teal-500 p-3 flex justify-around text-white;
+}
+
+/* Ícones do footer */
+.footer-item {
+  @apply flex flex-col items-center text-xs;
+}
+
+/* Header */
+.header {
+  @apply bg-white p-4 shadow flex justify-between items-center;
+}
+
+/* Logo */
+.logo {
+  @apply h-12;
+}
+
+/* Avatar */
+.avatar {
+  @apply h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center;
+}
