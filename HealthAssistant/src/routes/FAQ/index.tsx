@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FAQ() {
+export default function Faq() {
   return (
     <div className="bg-[#2196c9] min-h-screen flex flex-col">
       <div className="bg-white px-4 py-4 flex items-center justify-between">
