@@ -1,42 +1,52 @@
-import { Link } from "react-router-dom";
 import Links from "../../components/Links/Links";
+import { useNavigate } from "react-router-dom";
 
 export default function Faq() {
+  const navigate = useNavigate();
   return (
-    <div className="bg-[#2196c9] min-h-screen flex flex-col">
-      <div className="bg-white px-4 py-4 flex items-center justify-between">
-        <img src="/logo.png" alt="Logo" className="h-12" />
-        <span className="text-4xl">{/* Ícone de perfil */}</span>
+    <div className="faq-bg">
+      <div className="faq-banner">
+        <button
+          onClick={() => navigate(-1)}
+          className="faq-back-btn mr-2 text-2xl hover:text-[#1de9b6]"
+          aria-label="Voltar"
+        >
+          ←
+        </button>
+        <h2 className="faq-title">FAQ</h2>
       </div>
-      <h2 className="bg-[#1976a5] text-white m-0 py-3 text-center text-xl font-semibold uppercase">
-        FAQ
-      </h2>
-      <div className="flex-1 p-4 flex flex-col gap-4">
-        <div className="bg-[#eaeaea] rounded-lg p-4 shadow">
-          <div className="font-semibold text-[#1976a5] mb-1">
+      <div className="faq-content">
+        <div className="faq-card">
+          <div className="faq-card-title">
             Como eu recebo o lembrete da consulta?
           </div>
-          <div className="text-[#222] text-sm">
+          <div className="faq-card-text">
             Você recebe via WhatsApp<br />
             um dia antes e no dia da consulta
           </div>
         </div>
-        <div className="bg-[#eaeaea] rounded-lg p-4 shadow">
-          <div className="font-semibold text-[#1976a5] mb-1">
+
+        <div className="faq-card">
+          <div className="faq-card-title">
             Preciso lembrar da senha?
           </div>
-          <div className="text-[#222] text-sm">
+          <div className="faq-card-text">
             Não. você recebe um código de verificação no seu celular para acessar caso você entre via data de nascimento e cpf
           </div>
         </div>
-        <div className="bg-[#eaeaea] rounded-lg p-4 shadow">
-          <div className="font-semibold text-[#1976a5] mb-1">
+      
+        <div className="faq-card">
+          <div className="faq-card-title">
             O sistema funciona em celular antigo?
           </div>
+          <div className="faq-card-text">
+            Sim, o sistema é otimizado para funcionar em celulares mais antigos, mas recomendamos o uso de dispositivos mais recentes para uma melhor experiência.
+          </div>
         </div>
-        <div className="bg-[#eaeaea] rounded-lg p-4 flex flex-col items-center gap-2 mt-4">
-          <div className="font-semibold text-[#222] mb-2">Precisa de ajuda?</div>
-          <button className="w-full bg-[#2196c9] text-white font-semibold rounded-md py-2">
+
+        <div className="faq-help-card">
+          <div className="faq-help-title">Precisa de ajuda?</div>
+          <button className="faq-btn">
             Pergunte ao assistente
           </button>
         </div>
