@@ -14,6 +14,9 @@ import LoginSenha from './routes/LoginComSenha/index.tsx'
 import QuemSomos from './routes/QuemSomos/index.tsx'
 import Agendar from './routes/Agendar/index.tsx'
 import Suporte from './routes/Suporte/index.tsx'
+import Teleconsulta from './routes/Teleconsulta/index.tsx'
+import Perfil from './routes/Perfil/index.tsx'
+import Resultados from './routes/Resultados/index.tsx'
 
 
 const router = createBrowserRouter([
@@ -28,6 +31,9 @@ const router = createBrowserRouter([
    {path: '/quemsomos', element: <QuemSomos />},
    {path: '/agendar', element: <Agendar />},
    {path: '/suporte', element: <Suporte />},
+   {path: '/teleconsulta', element: <Teleconsulta />},
+   {path: '/perfil', element: <Perfil />},
+   {path: '/resultados', element: <Resultados />},
   ]}
 ]);
 
