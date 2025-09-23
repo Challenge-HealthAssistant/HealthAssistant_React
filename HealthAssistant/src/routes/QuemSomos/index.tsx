@@ -1,7 +1,7 @@
 
 const team = [
   { name: "Pietro Paranhos Wilhelm", rm: "561378", group: "1TDSPH" },
-  { name: "Leonardo", rm: "552417", group: "1TDSPH" },
+  { name: "Leonardo Rodrigues", rm: "552417", group: "1TDSPH" },
   { name: "Arthur Silvera", rm: "562310", group: "1TDSPH" },
 ];
 
