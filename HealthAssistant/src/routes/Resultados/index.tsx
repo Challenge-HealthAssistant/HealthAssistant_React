@@ -1,4 +1,3 @@
-
 const resultados = [
   {
     ano: 2024,
@@ -76,7 +75,7 @@ export default function Resultados() {
         {resultados.map((grupo) => (
           <div key={grupo.ano} className="mb-6">
             <div className="text-white font-bold mb-2 text-lg">{grupo.ano}</div>
-            {grupo.exames.map((exame, idx) => (
+            {grupo.exames.map((exame) => (
               <div
                 key={exame.ficha}
                 className="bg-[#2196c9] text-white rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6]"
@@ -91,4 +90,7 @@ export default function Resultados() {
             ))}
           </div>
         ))}
-</div>
+      </div>
+    </div>
+  );
+}
