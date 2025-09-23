@@ -27,7 +27,7 @@ const team = [
     rm: "562310",
     group: "1TDSPH",
     github: "https://github.com/arthurscamara",
-    linkedin: "https://www.linkedin.com/in/arthur-silvera/",
+    linkedin: "https://www.linkedin.com/in/arthur-câmara-766697386/",
     photo: arthurImg
   },
 ];
