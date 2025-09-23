@@ -1,22 +1,20 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import Links from "../../components/Links/Links";
 
 export default function Agendamentos() {
 
-  function handleVoltar() {
-    alert("Voltar para a página anterior");
-  }
+  const navigate = useNavigate();
 
-  function handleNav(page: string) {
-    alert(`Ir para ${page}`);
-  }
-
+    const handleNavigateHome = () => {
+        navigate('/');
+    };
+    
   return (
     <div className="bg-[#157AB9] min-h-screen flex flex-col">
       <div className="bg-white px-4 py-4 flex items-center justify-between">
         <button
           className="text-2xl text-[#157AB9] bg-transparent border-none"
-          onClick={handleVoltar}
+          onClick={handleNavigateHome}
         >
           ←
         </button>
