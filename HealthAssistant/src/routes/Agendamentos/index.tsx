@@ -1,7 +1,7 @@
-import React from "react";
 import { Link } from "react-router";
 
 export default function Agendamentos() {
+  
   function handleVoltar() {
     alert("Voltar para a página anterior");
   }

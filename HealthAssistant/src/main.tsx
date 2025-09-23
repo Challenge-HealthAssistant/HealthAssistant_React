@@ -17,11 +17,13 @@ import Suporte from './routes/Suporte/index.tsx'
 import Teleconsulta from './routes/Teleconsulta/index.tsx'
 import Perfil from './routes/Perfil/index.tsx'
 import Resultados from './routes/Resultados/index.tsx'
+import Error from './routes/Error/index.tsx'
+
 
 
 const router = createBrowserRouter([
-  {path: '/', element: <App />, children: [
-   {path: '/home', element: <Home />},
+  {path: '/', element: <App />,errorElement:<Error />,children: [
+   {path: '/', element: <Home />},
    {path: '/agendamentos', element: <Agendamentos />},
    {path: '/codigodeverificacao', element: <CodigoVerificacao />},
    {path: '/cadastro', element: <Cadastro />},
