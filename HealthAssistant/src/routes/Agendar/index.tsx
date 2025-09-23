@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router";
+import Links from "../../components/Links/Links";
 
 export default function Agendar() {
   function handleVerDetalhes(servico: string) {
@@ -76,32 +78,7 @@ export default function Agendar() {
           </div>
         </div>
       </div>
-      <nav className="flex justify-around bg-[#1de9b6] py-3">
-        <button
-          className="bg-none border-none text-lg font-bold text-[#1976a5]"
-          onClick={() => handleNav("Início")}
-        >
-          Início
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Quem somos")}
-        >
-          Quem somos
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Faq")}
-        >
-          Faq
-        </button>
-        <button
-          className="bg-none border-none text-lg"
-          onClick={() => handleNav("Suporte")}
-        >
-          Suporte
-        </button>
-      </nav>
+      <Links />
     </div>
   );
 }

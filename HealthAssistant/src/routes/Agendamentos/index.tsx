@@ -1,7 +1,8 @@
 import { Link } from "react-router";
+import Links from "../../components/Links/Links";
 
 export default function Agendamentos() {
-  
+
   function handleVoltar() {
     alert("Voltar para a página anterior");
   }
@@ -40,12 +41,7 @@ export default function Agendamentos() {
           você não possui acessos recentes
         </div>
       </div>
-      <nav className="flex justify-around bg-[#03A9AA] py-3">
-        <Link className="bg-none border-none text-lg" to="/"> Início</Link>
-        <Link className="bg-none border-none text-lg" to="/quem-somos"> Quem somos</Link>
-        <Link className="bg-none border-none text-lg" to="/faq"> Faq</Link>
-        <Link className="bg-none border-none text-lg" to="/suporte"> Suporte</Link>
-      </nav>
+      <Links />
     </div>
   );
 }
