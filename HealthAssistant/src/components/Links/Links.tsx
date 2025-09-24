@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import home from "../../img/home.png";
 import quemSomos from "../../img/quem_somos.png";
 import faq from "../../img/faq.png";
-import chatbot from "../../img/chatbot.png";
+import suporte from "../../img/suporte.png";
 
 export default function Links() {
     return (
@@ -20,7 +20,7 @@ export default function Links() {
             FAQ
         </Link>
         <Link className="bottom-links-item" to='/suporte'>
-            <img src={chatbot} alt="Suporte" className="bottom-links-icon" />
+            <img src={suporte} alt="Suporte" className="bottom-links-icon" />
             Suporte
         </Link>
         </nav>
