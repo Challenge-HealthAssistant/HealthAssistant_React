@@ -1,27 +1,51 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import type { tipoPaciente } from "../../types/tipoPaciente";
+import { listaPacientes } from "../../components/data/Pacientes";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    alert(`CPF: ${cpf}\nData de nascimento: ${dataNascimento}`);
-  }
-
-  function handleEntrarComSenha() {
-    alert("Ir para login com senha");
-  }
-
-  function handleCadastro() {
-    alert("Ir para cadastro");
+  async function handleLogin() {
+    setErro("");
+    setCarregando(true);
+    
+    try {
+      // Buscar paciente diretamente (sem delay)
+      const pacienteEncontrado = listaPacientes.find((paciente: tipoPaciente) => 
+        paciente.cpf === cpf && paciente.dataNascimento === dataNascimento
+      );
+      
+      if (pacienteEncontrado) {
+        localStorage.setItem('pacienteLogadoId', pacienteEncontrado.id.toString());
+        localStorage.setItem('pacienteLogadoNome', pacienteEncontrado.nome);
+        navigate("/codigodeverificacao");
+      } else {
+        setErro("CPF ou data de nascimento incorretos. Tente novamente.");
+      }
+    } catch (error) {
+      setErro("Erro interno. Tente novamente.");
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
     <div className="bg-[#2196c9] min-h-screen flex flex-col items-center">
-      <form
+      {/* Informações para teste - remover em produção */}
+      <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded mt-4 text-xs max-w-[340px]">
+        <strong>Dados para teste:</strong><br/>
+        <strong>Maria:</strong> CPF: 123.456.789-00, Data: 10/10/2000<br/>
+        <strong>João:</strong> CPF: 987.654.321-00, Data: 05/08/1998<br/>
+        <strong>Ana:</strong> CPF: 456.789.123-00, Data: 22/03/2002
+      </div>
+      
+      <div
         className="bg-white mt-6 rounded-lg w-[340px] p-6"
-        onSubmit={handleSubmit}
       >
         <h2 className="bg-[#1976a5] text-white -mt-6 -mx-6 mb-6 py-4 rounded-t-lg text-center text-lg font-semibold">
           Acessar conta
@@ -42,11 +66,24 @@ export default function Login() {
           onChange={(e) => setDataNascimento(e.target.value)}
         />
         <div className="text-xs text-[#888] mb-4">Digite apenas números</div>
+        
+        {erro && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
+            {erro}
+          </div>
+        )}
+        
         <button
-          type="submit"
-          className="w-full p-2.5 rounded-md border-none bg-[#bdbdbd] text-[#222] font-semibold mb-4"
+          type="button"
+          onClick={handleLogin}
+          disabled={carregando}
+          className={`w-full p-2.5 rounded-md border-none font-semibold mb-4 ${
+            carregando 
+              ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+              : 'bg-[#1976a5] text-white hover:bg-[#155a8a]'
+          }`}
         >
-          Entrar
+          {carregando ? 'Entrando...' : 'Entrar'}
         </button>
         <div className="flex items-center my-2">
           <hr className="flex-1 border-[#1976a5]" />
@@ -56,7 +93,7 @@ export default function Login() {
         <button
           type="button"
           className="w-full p-2.5 rounded-md border-none bg-[#eaeaea] text-[#1976a5] font-semibold mb-2"
-          onClick={handleEntrarComSenha}
+          onClick={() => navigate("/loginsenha")}
         >
           Entrar com senha
         </button>
@@ -64,12 +101,12 @@ export default function Login() {
           <button
             type="button"
             className="text-[#1976a5] font-semibold no-underline"
-            onClick={handleCadastro}
+            onClick={() => navigate("/cadastro")}
           >
             Fazer cadastro
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
