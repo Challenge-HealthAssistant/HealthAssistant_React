@@ -1,90 +1,123 @@
-import React, { useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CodigoVerificacao() {
   const [codigo, setCodigo] = useState<string[]>(Array(6).fill(""));
+  const [erro, setErro] = useState("");
+  const [avisoNumeros, setAvisoNumeros] = useState("");
+  const [numeroTelefone, setNumeroTelefone] = useState("(**) *****-****");
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+  const navigate = useNavigate();
 
-  function handleChange(index: number, value: string) {
-    if (!/^[0-9]?$/.test(value)) return;
+  useEffect(() => {
+    // Pegar dados do paciente logado
+    const pacienteId = localStorage.getItem('pacienteLogadoId');
+    const pacienteNome = localStorage.getItem('pacienteLogadoNome');
+    
+    if (pacienteId && pacienteNome) {
+      // Simular número baseado no ID do paciente - mostrar primeiros dígitos
+      const primeirosDigitos = pacienteId.padStart(4, '0').slice(-4);
+      setNumeroTelefone(`(11) 9${primeirosDigitos}-****`);
+    }
+  }, []);
+
+  function handleInputChange(index: number, value: string) {
+    // Limpar avisos anteriores
+    setErro("");
+    setAvisoNumeros("");
+    
+    // Verificar se contém apenas números
+    if (!/^\d?$/.test(value)) {
+      setAvisoNumeros("Digite apenas números de 0 a 9.");
+      setTimeout(() => setAvisoNumeros(""), 3000);
+      return;
+    }
+    
+    // Atualizar o código
     const novoCodigo = [...codigo];
     novoCodigo[index] = value;
     setCodigo(novoCodigo);
-
+    
+    // Auto-navegar para próxima caixa se digitou um número e não é a última caixa
     if (value && index < 5) {
       inputsRef.current[index + 1]?.focus();
     }
   }
 
-  function handleKeyDown(index: number, e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Backspace" && !codigo[index] && index > 0) {
-      inputsRef.current[index - 1]?.focus();
+  function handleVerificar() {
+    // Limpar avisos anteriores
+    setErro("");
+    setAvisoNumeros("");
+    
+    const codigoCompleto = codigo.join("");
+    
+    // Validar se código está vazio
+    if (!codigoCompleto) {
+      setErro("Digite o código de verificação.");
+      return;
+    }
+    
+    if (codigoCompleto === "123456") {
+      // Código correto, redirecionar para a home
+      navigate("/");
+    } else {
+      // Código incorreto: mostrar erro e limpar caixas
+      setErro("Código incorreto. Tente novamente.");
+      setCodigo(Array(6).fill(""));
     }
   }
 
-  function handleVerificar() {
-    alert("Código digitado: " + codigo.join(""));
-  }
-
   function handleVoltar() {
-    alert("Voltar para tela anterior");
-  }
-
-  function handleReenviar() {
-    alert("Código reenviado!");
+    // Voltar para a tela de login
+    navigate("/login");
   }
 
   return (
-    <div className="bg-[#2196c9] min-h-screen flex flex-col items-center">
-      <div className="mt-6">
-        <img src="/logo.png" alt="Logo" className="h-20" />
-      </div>
-      <div className="bg-white mt-6 rounded-lg w-[340px] p-6">
-        <h2 className="bg-[#1976a5] text-white -mt-6 -mx-6 mb-6 py-4 px-0 rounded-t-lg text-center text-lg font-semibold">
-          Acessar conta
+    <div className="verificacao-container">
+      <div className="verificacao-card">
+        <h2 className="verificacao-header">
+          Verificação de Código
         </h2>
-        <label className="text-[#1976a5] font-semibold">
+        <label className="verificacao-label">
           Digite o código de verificação enviado no seu número:
         </label>
-        <div className="my-3 font-semibold text-[#1976a5]">
-          (**) 999999-*****
+        <div className="verificacao-phone">
+          {numeroTelefone}
         </div>
-        <div className="flex justify-between mb-4">
+        <div className="verificacao-inputs-container">
           {codigo.map((valor, i) => (
             <input
               key={i}
+              ref={el => { inputsRef.current[i] = el; }}
               maxLength={1}
-              ref={el => (inputsRef.current[i] = el)}
               value={valor}
-              onChange={e => handleChange(i, e.target.value.replace(/[^0-9]/g, ""))}
-              onKeyDown={e => handleKeyDown(i, e)}
-              className="w-10 h-10 text-2xl text-center rounded-md border border-[#bdbdbd] bg-[#eaeaea] outline-none"
+              onChange={(e) => handleInputChange(i, e.target.value)}
+              className="verificacao-input"
               type="text"
               inputMode="numeric"
-              autoComplete="one-time-code"
             />
           ))}
         </div>
-        <div className="text-xs text-[#888] mb-2">
-          Reenviar código em 00:45
-        </div>
-        <div className="text-xs text-[#1976a5] mb-4">
-          Não recebeu?{" "}
-          <button
-            type="button"
-            className="text-[#1976a5] font-semibold no-underline"
-            onClick={handleReenviar}
-          >
-            Reenviar código
-          </button>
-        </div>
+        
+        {erro && (
+          <div className="verificacao-error">
+            {erro}
+          </div>
+        )}
+        
+        {avisoNumeros && (
+          <div className="verificacao-warning">
+            {avisoNumeros}
+          </div>
+        )}
         <button
-          className="w-full p-2.5 rounded-md border-none bg-[#bdbdbd] text-[#222] font-semibold mb-4"
+          className="verificacao-button-primary"
           onClick={handleVerificar}
         >
           Verificar
         </button>
         <button
-          className="w-full p-2.5 rounded-md border-none bg-[#1de9b6] text-[#1976a5] font-semibold"
+          className="verificacao-button-secondary"
           onClick={handleVoltar}
         >
           Voltar

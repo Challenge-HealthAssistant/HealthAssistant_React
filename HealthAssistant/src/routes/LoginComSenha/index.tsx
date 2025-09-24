@@ -3,9 +3,6 @@
 export default function LoginSenha() {
   return (
     <div className="bg-[#2196c9] min-h-screen flex flex-col items-center">
-      <div className="mt-6">
-        <img src="/logo.png" alt="Logo" className="h-20" />
-      </div>
       <div className="bg-white mt-6 rounded-lg w-[340px] p-6">
         <h2 className="bg-[#1976a5] text-white -mt-6 -mx-6 mb-6 py-4 rounded-t-lg text-center text-lg font-semibold">
           Acessar conta
