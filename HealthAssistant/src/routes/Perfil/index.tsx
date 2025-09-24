@@ -1,26 +1,38 @@
 import Links from "../../components/Links/Links";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useState, useEffect } from "react";
 import type { tipoPaciente } from "../../types/tipoPaciente";
 import { listaPacientes } from "../../data/Pacientes";
 
 export default function Perfil() {
   const navigate = useNavigate();
+  const { id } = useParams(); // useParams para pegar ID da URL - Exemplo: /perfil/2
   
   const [perfil, setPerfil] = useState<tipoPaciente | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Pegar ID do paciente que fez login
-    const pacienteLogadoIdStr = localStorage.getItem('pacienteLogadoId');
+    // Demonstração useParams - mostra ID da URL no console
+    console.log("ID da URL (useParams):", id);
     
-    if (!pacienteLogadoIdStr) {
-      // Se não há paciente logado, redirecionar para login
-      navigate('/login');
-      return;
+    // Usar ID da URL se disponível, senão usar localStorage
+    let pacienteLogadoId: number;
+    
+    if (id) {
+      // Se há ID na URL, usar ele
+      pacienteLogadoId = Number(id);
+    } else {
+      // Senão, pegar do localStorage (comportamento atual)
+      const pacienteLogadoIdStr = localStorage.getItem('pacienteLogadoId');
+      
+      if (!pacienteLogadoIdStr) {
+        // Se não há paciente logado, redirecionar para login
+        navigate('/login');
+        return;
+      }
+      
+      pacienteLogadoId = Number(pacienteLogadoIdStr);
     }
-    
-    const pacienteLogadoId = Number(pacienteLogadoIdStr);
     
     // Simular delay de carregamento (opcional)
     setTimeout(() => {
@@ -36,7 +48,7 @@ export default function Perfil() {
       }
       setLoading(false);
     }, 600);
-  }, [navigate]);
+  }, [navigate, id]); // Adicionar id como dependência
 
   function handleSair() {
     // Limpar dados do usuário logado

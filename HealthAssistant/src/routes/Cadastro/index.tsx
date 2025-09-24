@@ -180,8 +180,6 @@ export default function Cadastro() {
       localStorage.setItem('pacienteLogadoId', novoPaciente.id.toString());
       localStorage.setItem('pacienteLogadoNome', novoPaciente.nome);
       
-      console.log('✅ Novo paciente cadastrado:', novoPaciente);
-      console.log('📋 Lista atualizada:', listaPacientes);
       
       // Navegar para verificação de código
       navigate("/codigodeverificacao");

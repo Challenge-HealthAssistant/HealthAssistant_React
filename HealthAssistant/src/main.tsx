@@ -35,6 +35,7 @@ const router = createBrowserRouter([
    {path: '/suporte', element: <Suporte />},
    {path: '/teleconsulta', element: <Teleconsulta />},
    {path: '/perfil', element: <Perfil />},
+   {path: '/perfil/:id', element: <Perfil />},
    {path: '/resultados', element: <Resultados />},
   ]}
 ]);
