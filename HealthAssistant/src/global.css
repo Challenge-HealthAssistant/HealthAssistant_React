@@ -167,6 +167,40 @@
     }
     
     /* ----------------- */
+    /* Suporte           */
+    /* ----------------- */
+    .suporte-bg {
+      @apply min-h-[100vh] flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .suporte-banner {
+      @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
+    }
+    .suporte-back-btn {
+      @apply mr-2 text-2xl hover:text-[#1de9b6];
+    }
+    .suporte-title {
+      @apply text-xl font-semibold uppercase flex-1 text-center;
+    }
+    .suporte-content {
+      @apply flex-1 flex flex-col justify-center items-center gap-4 p-6;
+    }
+    .suporte-button {
+      @apply w-full max-w-sm py-4 px-6 bg-[#eaeaea] text-[#1976a5] font-semibold text-lg rounded-lg border-none hover:bg-gray-100 transition-colors cursor-pointer;
+    }
+    .suporte-chat-button {
+      @apply w-full max-w-sm py-4 px-6 bg-[#1de9b6] text-[#1976a5] font-semibold text-lg rounded-lg border-none hover:bg-[#18c7a3] transition-colors cursor-pointer flex items-center justify-center gap-3;
+    }
+    .suporte-chat-icon-bg {
+      @apply flex items-center justify-center;
+    }
+    .suporte-chat-icon {
+      @apply w-8 h-8;
+    }
+    
+    /* ----------------- */
     /* Agendar           */
     /* ----------------- */
     .agendar-bg {
