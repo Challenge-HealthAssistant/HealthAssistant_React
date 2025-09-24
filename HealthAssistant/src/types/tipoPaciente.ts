@@ -4,6 +4,7 @@ export type tipoPaciente = {
     dataNascimento: string;
     cpf: string;
     telefone: string;
+    senha: string;
     email: string;
     endereco: string;
     bairro: string;

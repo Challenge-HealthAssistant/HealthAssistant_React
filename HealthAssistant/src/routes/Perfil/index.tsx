@@ -97,6 +97,11 @@ export default function Perfil() {
             </div>
 
             <div className="perfil-field">
+                <label className="perfil-label">Senha</label>
+                <div className="perfil-value">{perfil.senha}</div>
+            </div>
+
+            <div className="perfil-field">
               <label className="perfil-label">E-mail</label>
               <div className="perfil-value">{perfil.email}</div>
             </div>
