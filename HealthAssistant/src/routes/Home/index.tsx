@@ -9,50 +9,41 @@ import resultadosIcon from "../../img/resultados.png";
 
 export default function Home() {
 
-    const navigate = useNavigate();
   
   return (
     <div className="home-bg">
       <Links />
-
-        <div className="agendar-banner">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="agendar-back-btn" 
-          aria-label="Voltar"
-        >
-          ←
-        </button>
+      <div className="agendar-banner">
         <h2 className="agendar-title">Tela Inicial</h2>
       </div>
 
       <div className="home-content">
-        <Link className="home-link" to="/teleconsulta" style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-          <span style={{display: 'flex', alignItems: 'center', marginLeft: '8px', marginRight: '12px'}}>
+        <Link className="home-link" to="/teleconsulta">
+          <span className="home-icon-container">
             <img src={teleconsultaIcon} alt="Teleconsulta" className="home-icon" />
           </span>
-          <span style={{flex: 1, textAlign: 'center'}}>Teleconsulta</span>
+          <span className="home-text">Teleconsulta</span>
         </Link>
 
-        <Link className="home-link" to="/agendar" style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-          <span style={{display: 'flex', alignItems: 'center', marginLeft: '8px', marginRight: '12px'}}>
+        <Link className="home-link" to="/agendar" >
+          <span className="home-icon-container">
             <img src={agendarIcon} alt="Agendar" className="home-icon" />
           </span>
-          <span style={{flex: 1, textAlign: 'center'}}>Agendar</span>
+          <span className="home-text">Agendar</span>
         </Link>
 
-        <Link className="home-link" to="/agendamentos" style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-          <span style={{display: 'flex', alignItems: 'center', marginLeft: '8px', marginRight: '12px'}}>
+        <Link className="home-link" to="/agendamentos" >
+          <span className="home-icon-container">
             <img src={agendaIcon} alt="Agendamentos" className="home-icon" />
           </span>
-          <span style={{flex: 1, textAlign: 'center'}}>Agendamentos</span>
+          <span className="home-text">Agendamentos</span>
         </Link>
 
-        <Link className="home-link" to="/resultados" style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-          <span style={{display: 'flex', alignItems: 'center', marginLeft: '8px', marginRight: '12px'}}>
+        <Link className="home-link" to="/resultados">
+          <span className="home-icon-container">
             <img src={resultadosIcon} alt="Resultados" className="home-icon" />
           </span>
-          <span style={{flex: 1, textAlign: 'center'}}>Resultados</span>
+          <span className="home-text">Resultados</span>
         </Link>
       </div>      
     </div>
