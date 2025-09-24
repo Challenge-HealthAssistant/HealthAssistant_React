@@ -237,4 +237,49 @@
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */     
      }
      
+    /* ----------------- */
+    /* Perfil            */
+    /* ----------------- */
+    .perfil-bg {
+      @apply bg-[#2196c9] min-h-screen flex flex-col;
+    }
+    .perfil-banner {
+      @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
+    }
+    .perfil-back-btn {
+      @apply mr-2 text-2xl hover:text-[#1de9b6];
+    }
+    .perfil-title {
+      @apply text-xl font-semibold flex-1 text-center;
+    }
+    .perfil-content {
+      @apply flex-1 p-4 flex flex-col items-center;
+    }
+    .perfil-card {
+      @apply bg-[#eaeaea] rounded-lg p-6 w-full max-w-md mx-auto shadow-sm;
+    }
+    .perfil-field {
+      @apply mb-4;
+    }
+    .perfil-label {
+      @apply block text-[#1976a5] font-semibold mb-1 text-sm;
+    }
+    .perfil-value {
+      @apply text-[#222] text-base bg-white p-2 rounded border border-gray-200;
+    }
+    .perfil-buttons {
+      @apply flex flex-col gap-3 mt-6;
+    }
+    .perfil-btn-editar {
+      @apply w-full py-2.5 px-4 rounded bg-[#1976a5] text-white font-semibold border-none hover:bg-[#155a8a] transition-colors cursor-pointer;
+    }
+    .perfil-btn-sair {
+      @apply w-full py-2.5 px-4 rounded bg-red-600 text-white font-semibold border-none hover:bg-red-700 transition-colors cursor-pointer;
+    }
+    .perfil-loading {
+      @apply text-center text-[#1976a5] font-semibold py-8;
+    }
+    .perfil-error {
+      @apply text-center text-red-600 font-semibold py-8;
+    }
   }

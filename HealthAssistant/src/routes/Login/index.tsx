@@ -19,9 +19,6 @@ export default function Login() {
 
   return (
     <div className="bg-[#2196c9] min-h-screen flex flex-col items-center">
-      <div className="mt-6">
-        <img src="/logo.png" alt="Logo" className="h-20" />
-      </div>
       <form
         className="bg-white mt-6 rounded-lg w-[340px] p-6"
         onSubmit={handleSubmit}
