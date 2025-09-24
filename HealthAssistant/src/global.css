@@ -466,4 +466,48 @@
     .cadastro-erro-texto {
       @apply text-red-700 text-sm font-medium;
     }
+    /* ----------------- */
+    /* Teleconsulta      */
+    /* ----------------- */
+    .teleconsulta-bg {
+    @apply min-h-[100vh] flex flex-col;
+    background: #2179b0; /* fallback */
+    background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed);
+    background: linear-gradient(to right, #2179b0, #6dd5ed);
+    }
+
+    .teleconsulta-banner {
+    @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
+    }
+    .teleconsulta-back-btn {
+    @apply mr-2 text-2xl hover:text-[#1de9b6];
+    }
+   .teleconsulta-title {
+    @apply text-xl font-semibold flex-1 text-center;
+    }
+    .teleconsulta-content {
+    @apply flex-1 p-6 flex flex-col items-center;
+    }
+    .teleconsulta-subtitle {
+    @apply text-white font-bold mb-4 uppercase text-sm mx-auto text-center;
+    }
+    .teleconsulta-cards-container {
+    @apply w-full max-w-sm sm:max-w-md mx-auto space-y-6;
+    }
+    .teleconsulta-card {
+    @apply bg-[#eaeaea] rounded-lg p-4 w-full shadow-sm;
+    }
+    .teleconsulta-card-title {
+    @apply text-[#1976a5] font-semibold mb-1 text-base;
+    }
+    .teleconsulta-card-subtitle {
+    @apply text-[#222] text-sm mb-2 leading-relaxed;
+    }
+    .teleconsulta-buttons {
+    @apply flex flex-col gap-2 w-full;
+    }
+    .teleconsulta-btn {
+    @apply w-full py-2.5 px-4 rounded bg-white text-[#1976a5] font-semibold border-none hover:bg-gray-50 transition-colors cursor-pointer;
+    }
+
   }
