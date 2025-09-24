@@ -83,7 +83,7 @@ export default function Login() {
         <button
           type="button"
           className="login-btn-secondary"
-          onClick={() => navigate("/loginsenha")}
+          onClick={() => navigate("/logincomsenha")}
         >
           Entrar com senha
         </button>

@@ -7,7 +7,7 @@ export const Header = () => {
   const location = useLocation();
   
   // Páginas onde o ícone do perfil deve ficar oculto
-  const paginasSemPerfil = ['/cadastro', '/login', '/loginsenha', '/codigodeverificacao'];
+  const paginasSemPerfil = ['/cadastro', '/login', '/logincomsenha', '/codigodeverificacao'];
   const ocultarPerfil = paginasSemPerfil.includes(location.pathname);
 
   return (

@@ -29,7 +29,7 @@ const router = createBrowserRouter([
    {path: '/cadastro', element: <Cadastro />},
    {path: '/faq', element: <Faq />},
    {path: '/login', element: <Login />},
-   {path: '/loginsenha', element: <LoginSenha />},
+   {path: '/logincomsenha', element: <LoginSenha />},
    {path: '/quemsomos', element: <QuemSomos />},
    {path: '/agendar', element: <Agendar />},
    {path: '/suporte', element: <Suporte />},
