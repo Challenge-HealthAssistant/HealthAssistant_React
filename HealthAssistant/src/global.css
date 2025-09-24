@@ -374,4 +374,50 @@
     .verificacao-button-secondary {
       @apply w-full p-2 sm:p-2.5 md:p-3 rounded-md border-none bg-[#1de9b6] text-[#1976a5] font-semibold text-xs sm:text-sm md:text-base hover:bg-[#18c7a3] transition-colors;
     }
+    
+    /* ----------------------------- */
+    /* Cadastro                      */
+    /* ----------------------------- */
+    .cadastro-container {
+      @apply bg-[#2196c9] min-h-screen flex flex-col items-center;
+    }
+    .cadastro-card {
+      @apply bg-white mt-6 rounded-lg w-full max-w-sm sm:max-w-md md:max-w-lg p-4 sm:p-6 shadow-lg;
+    }
+    .cadastro-header {
+      @apply bg-[#1976a5] text-white -mt-4 sm:-mt-6 -mx-4 sm:-mx-6 mb-4 sm:mb-6 py-3 sm:py-4 px-0 rounded-t-lg text-center text-base sm:text-lg md:text-xl font-semibold;
+    }
+    .cadastro-label {
+      @apply text-[#1976a5] font-semibold mb-3;
+    }
+    .cadastro-input {
+      @apply w-full mb-3 p-2.5 rounded-md border-none bg-[#eaeaea] outline-none;
+    }
+    .cadastro-input-last {
+      @apply w-full mb-4 p-2.5 rounded-md border-none bg-[#eaeaea] outline-none;
+    }
+    .cadastro-sexo-container {
+      @apply mb-3;
+    }
+    .cadastro-sexo-label {
+      @apply text-[#1976a5] font-semibold mb-1;
+    }
+    .cadastro-sexo-buttons {
+      @apply flex gap-2;
+    }
+    .cadastro-sexo-button {
+      @apply flex-1 p-2.5 rounded-md font-semibold transition-colors;
+    }
+    .cadastro-sexo-button-selected {
+      @apply border-2 border-[#1976a5] bg-[#eaeaea] text-[#1976a5];
+    }
+    .cadastro-sexo-button-unselected {
+      @apply border border-[#bdbdbd] bg-[#eaeaea] text-[#1976a5] hover:border-[#1976a5];
+    }
+    .cadastro-button-primary {
+      @apply w-full p-2.5 rounded-md border-none bg-[#bdbdbd] text-[#222] font-semibold mb-4 hover:bg-[#a8a8a8] transition-colors;
+    }
+    .cadastro-button-secondary {
+      @apply w-full p-2.5 rounded-md border-none bg-[#1de9b6] text-[#1976a5] font-semibold hover:bg-[#18c7a3] transition-colors;
+    }
   }
