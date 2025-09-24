@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
 
 import Links from "../../components/Links/Links";
 import teleconsultaIcon from "../../img/teleconsulta.png";
