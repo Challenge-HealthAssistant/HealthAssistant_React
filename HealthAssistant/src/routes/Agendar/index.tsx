@@ -1,11 +1,25 @@
+
+import { useNavigate } from "react-router-dom";
 import Links from "../../components/Links/Links";
 
 export default function Agendar() {
+
+  const navigate = useNavigate();
+
+
+
   return (
     <div className="agendar-bg">
-      <h2 className="agendar-banner">
-        agendar
-      </h2>
+      <div className="agendar-banner">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="agendar-back-btn" 
+          aria-label="Voltar"
+        >
+          ←
+        </button>
+        <h2 className="agendar-title">Agendar</h2>
+      </div>
       <div className="agendar-content">
         <div className="agendar-subtitle">
           Consulte a cobertura convênio ou agende particular
