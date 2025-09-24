@@ -16,7 +16,14 @@
     /* Bottom Links      */
     /* ----------------- */
     .bottom-links {
-      @apply flex justify-around bg-[#1de9b6] py-3;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      /* Gradiente verde */
+      background: #1D976C; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #93F9B9, #1D976C); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #1ab07b, #93F9B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .bottom-links-item {
       @apply flex flex-col items-center gap-1 text-lg;
@@ -53,7 +60,13 @@
     /* Home              */
     /* ----------------- */
     .home-bg {
-      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      /* Gradiente azul */
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .home-content {
       @apply flex-1 flex flex-col justify-center items-center gap-2 sm:gap-3 p-2;
@@ -70,7 +83,10 @@
     /* Quem Somos        */
     /* ----------------- */
     .quemsomos-bg {
-      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
+      @apply min-h-[100vh] flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .quemsomos-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
@@ -107,7 +123,11 @@
     /* FAQ               */
     /* ----------------- */
     .faq-bg {
-      @apply bg-[#2196c9] min-h-[100vh] flex flex-col;
+      @apply min-h-[100vh] flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     }
     .faq-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4 ;
@@ -147,7 +167,10 @@
     /* Agendar           */
     /* ----------------- */
     .agendar-bg {
-      @apply bg-[#2196c9] min-h-screen flex flex-col;
+      @apply min-h-screen flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .agendar-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
@@ -156,13 +179,13 @@
       @apply mr-2 text-2xl hover:text-[#1de9b6];
     }
     .agendar-title {
-      @apply text-xl font-semibold flex-1 text-center lowercase;
+      @apply text-xl font-semibold flex-1 text-center;
     }
     .agendar-content {
       @apply flex-1 p-6 flex flex-col items-center;
     }
     .agendar-subtitle {
-      @apply text-white font-bold mb-4 uppercase text-sm max-w-sm mx-auto text-center;
+      @apply text-white font-bold mb-4 uppercase text-sm mx-auto text-center;
     }
     .agendar-cards-container {
       @apply w-full max-w-sm sm:max-w-md mx-auto space-y-6;
@@ -188,4 +211,27 @@
     .agendar-btn {
       @apply w-full py-2.5 px-4 rounded bg-white text-[#1976a5] font-semibold border-none hover:bg-gray-50 transition-colors cursor-pointer;
     }
+
+     /* ----------------- */
+     /* Agendamentos      */
+     /* ----------------- */
+
+     .agendamentos {
+      @apply bg-[#157AB9] min-h-screen flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+     }
+
+     /* ----------------- */
+     /* Resultados        */
+     /* ----------------- */
+
+     .resultados {
+      @apply bg-[#2196c9] min-h-screen flex flex-col;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */     
+     }
+     
   }

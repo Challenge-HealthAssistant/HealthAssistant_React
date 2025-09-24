@@ -6,6 +6,7 @@ export default function Faq() {
   const navigate = useNavigate();
   return (
     <div className="faq-bg">
+      <Links />
       <div className="faq-banner">
         <button
           onClick={() => navigate(-1)}
@@ -53,7 +54,6 @@ export default function Faq() {
           </button>
         </div>
       </div>
-      <Links />
     </div>
   );
 }

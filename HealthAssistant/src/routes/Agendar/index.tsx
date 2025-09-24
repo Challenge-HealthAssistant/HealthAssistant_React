@@ -10,6 +10,7 @@ export default function Agendar() {
 
   return (
     <div className="agendar-bg">
+      <Links />
       <div className="agendar-banner">
         <button 
           onClick={() => navigate(-1)} 
@@ -29,7 +30,7 @@ export default function Agendar() {
           <div className="agendar-card">
             <div className="agendar-card-title">Psicologia</div>
             <div className="agendar-card-subtitle">
-              outros nomes: Psicoterapia, Psicanálise, Psciociência
+              Outros nomes: Psicoterapia, Psicanálise, Psciociência
             </div>
             <div className="agendar-card-location">
               <span className="agendar-card-location-text">Na unidade</span>
@@ -53,7 +54,7 @@ export default function Agendar() {
           <div className="agendar-card">
             <div className="agendar-card-title">Hemograma, sangue total</div>
             <div className="agendar-card-subtitle">
-              outros nomes: Hemograma, Hemograma completo, Hemograma Sangue
+              Outros nomes: Hemograma, Hemograma completo, Hemograma Sangue
             </div>
             <div className="agendar-card-location">
               <span className="agendar-card-location-text">Na unidade</span>
@@ -75,7 +76,6 @@ export default function Agendar() {
           </div>
         </div>
       </div>
-      <Links />
     </div>
   );
 }

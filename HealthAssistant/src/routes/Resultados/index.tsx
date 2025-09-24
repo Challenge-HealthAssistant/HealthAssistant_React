@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router";
+import Links from "../../components/Links/Links";
+
 const resultados = [
   {
     ano: 2024,
@@ -48,29 +51,25 @@ const resultados = [
 ];
 
 export default function Resultados() {
-  function handleVoltar() {
-    alert("Voltar para a página anterior");
-  }
 
-  function handleNav(page: string) {
-    alert(`Ir para ${page}`);
-  }
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-[#2196c9] min-h-screen flex flex-col">
-      <div className="bg-white px-4 py-4 flex items-center justify-between">
-        <button
-          className="text-2xl text-[#1976a5] bg-transparent border-none"
-          onClick={handleVoltar}
+    
+    <div className="resultados">
+      <Links />
+      
+      <div className="agendar-banner">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="agendar-back-btn" 
+          aria-label="Voltar"
         >
           ←
         </button>
-        <img src="/logo.png" alt="Logo" className="h-12" />
-        <span className="text-4xl"></span>
+        <h2 className="agendar-title">Resultados</h2>
       </div>
-      <h2 className="bg-[#1976a5] text-white m-0 py-3 text-center text-xl font-semibold">
-        Resultados
-      </h2>
+      
       <div className="flex-1 p-4 overflow-y-auto">
         {resultados.map((grupo) => (
           <div key={grupo.ano} className="mb-6">
@@ -78,7 +77,7 @@ export default function Resultados() {
             {grupo.exames.map((exame) => (
               <div
                 key={exame.ficha}
-                className="bg-[#2196c9] text-white rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6]"
+                className="bg-[#ffffff] text-black rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6]"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-bold text-lg">{exame.data}</span>

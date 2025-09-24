@@ -36,8 +36,9 @@ export default function QuemSomos() {
 
   const navigate = useNavigate();
 
-  return (
+  return (    
     <div className="quemsomos-bg">
+      <Links />
       <div className="quemsomos-banner">
         <button
           onClick={() => navigate(-1)}
@@ -68,7 +69,6 @@ export default function QuemSomos() {
           </div>
         ))}
       </div>
-      <Links />
     </div>
   );
 }

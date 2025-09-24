@@ -4,26 +4,21 @@ import Links from "../../components/Links/Links";
 export default function Agendamentos() {
 
   const navigate = useNavigate();
-
-    const handleNavigateHome = () => {
-        navigate('/');
-    };
     
   return (
-    <div className="bg-[#157AB9] min-h-screen flex flex-col">
-      <div className="bg-white px-4 py-4 flex items-center justify-between">
-        <button
-          className="text-2xl text-[#157AB9] bg-transparent border-none"
-          onClick={handleNavigateHome}
+    <div className="agendamentos">
+
+      <Links />
+      <div className="agendar-banner">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="agendar-back-btn" 
+          aria-label="Voltar"
         >
           ←
         </button>
-        <img src="/logo.png" alt="Logo" className="h-12" />
-        <span className="text-4xl">👤</span>
+        <h2 className="agendar-title">Agendamentos</h2>
       </div>
-      <h2 className="bg-[#157AB9] text-white m-0 py-3 text-center text-xl font-semibold">
-        Agendamentos
-      </h2>
       <div className="flex-1 p-6">
         <div className="bg-[#D9D9D9] rounded-lg p-4 mb-6">
           <div className="text-[#157AB9] font-semibold mb-2">Próximas consultas</div>
@@ -39,7 +34,6 @@ export default function Agendamentos() {
           você não possui acessos recentes
         </div>
       </div>
-      <Links />
     </div>
   );
 }
