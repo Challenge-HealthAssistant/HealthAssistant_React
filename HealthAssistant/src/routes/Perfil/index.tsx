@@ -2,7 +2,7 @@ import Links from "../../components/Links/Links";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import type { tipoPaciente } from "../../types/tipoPaciente";
-import { listaPacientes } from "../../components/data/Pacientes";
+import { listaPacientes } from "../../data/Pacientes";
 
 export default function Perfil() {
   const navigate = useNavigate();

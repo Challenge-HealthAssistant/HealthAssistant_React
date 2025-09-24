@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { tipoPaciente } from "../../types/tipoPaciente";
-import { listaPacientes } from "../../components/data/Pacientes";
+import { listaPacientes } from "../../data/Pacientes";
 
 export default function LoginSenha() {
 
