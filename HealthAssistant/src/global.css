@@ -282,4 +282,59 @@
     .perfil-error {
       @apply text-center text-red-600 font-semibold py-8;
     }
+    
+    /* ----------------- */
+    /* Login             */
+    /* ----------------- */
+    .login-bg {
+      @apply bg-[#2196c9] min-h-screen flex items-center justify-center;
+    }
+    .login-container {
+      @apply bg-white rounded-lg w-[340px] p-6 shadow-lg;
+    }
+    .login-header {
+      @apply bg-[#1976a5] text-white -mt-6 -mx-6 mb-6 py-4 rounded-t-lg text-center text-lg font-semibold;
+    }
+    .login-label {
+      @apply text-[#1976a5] font-semibold block mb-2;
+    }
+    .login-input {
+      @apply w-full mb-3 p-2.5 rounded-md border-none bg-[#eaeaea] outline-none;
+    }
+    .login-input-date {
+      @apply w-full mb-1 p-2.5 rounded-md border-none bg-[#eaeaea] outline-none;
+    }
+    .login-hint {
+      @apply text-xs text-[#888] mb-4;
+    }
+    .login-error {
+      @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm;
+    }
+    .login-btn-primary {
+      @apply w-full p-2.5 rounded-md border-none font-semibold mb-4;
+    }
+    .login-btn-loading {
+      @apply bg-gray-400 text-gray-600 cursor-not-allowed;
+    }
+    .login-btn-active {
+      @apply bg-[#1976a5] text-white hover:bg-[#155a8a];
+    }
+    .login-divider {
+      @apply flex items-center my-2;
+    }
+    .login-divider-line {
+      @apply flex-1 border-[#1976a5];
+    }
+    .login-divider-text {
+      @apply mx-2 text-[#1976a5] font-semibold;
+    }
+    .login-btn-secondary {
+      @apply w-full p-2.5 rounded-md border-none bg-[#eaeaea] text-[#1976a5] font-semibold mb-2;
+    }
+    .login-signup-container {
+      @apply text-center mt-2;
+    }
+    .login-signup-btn {
+      @apply text-[#1976a5] font-semibold no-underline;
+    }
   }
