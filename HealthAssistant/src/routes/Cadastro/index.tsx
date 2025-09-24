@@ -1,6 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
+  
+  const navigate = useNavigate();
+  
+  function handleVoltar() {
+    navigate(-1);
+  }
+
   const [sexo, setSexo] = useState("Masculino");
 
   return (
@@ -55,10 +63,10 @@ export default function Cadastro() {
           placeholder="Número de telefone"
           className="cadastro-input-last"
         />
-        <button className="cadastro-button-primary">
+        <button className="cadastro-button-primary" >
           Cadastrar
         </button>
-        <button className="cadastro-button-secondary">
+        <button className="cadastro-button-secondary" onClick={handleVoltar}>
           Voltar
         </button>
       </div>
