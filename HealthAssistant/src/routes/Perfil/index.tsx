@@ -12,8 +12,6 @@ export default function Perfil() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Demonstração useParams - mostra ID da URL no console
-    console.log("ID da URL (useParams):", id);
     
     // Usar ID da URL se disponível, senão usar localStorage
     let pacienteLogadoId: number;
@@ -34,7 +32,7 @@ export default function Perfil() {
       pacienteLogadoId = Number(pacienteLogadoIdStr);
     }
     
-    // Simular delay de carregamento (opcional)
+    // Simular delay de carregamento 
     setTimeout(() => {
       const pacienteLogado = listaPacientes.find((paciente: tipoPaciente) => paciente.id === pacienteLogadoId);
       
