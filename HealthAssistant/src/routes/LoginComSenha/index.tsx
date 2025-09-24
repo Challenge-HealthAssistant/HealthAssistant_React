@@ -11,14 +11,33 @@ export default function LoginSenha() {
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
+  function formatarCPF(value: string) {
+    // Remove tudo que não é dígito
+    const apenasNumeros = value.replace(/\D/g, '');
+    
+    // Limita a 11 dígitos
+    const limitado = apenasNumeros.slice(0, 11);
+    
+    // Aplica a máscara
+    return limitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  }
+
+  function handleCPFChange(value: string) {
+    const cpfFormatado = formatarCPF(value);
+    setCpf(cpfFormatado);
+  }
+
   async function handleLogin() {
     setErro("");
     setCarregando(true);
     
     try {
       // Buscar paciente diretamente (sem delay)
+      // Remove formatação do CPF para comparação
+      const cpfLimpo = cpf.replace(/\D/g, '');
+      
       const pacienteEncontrado = listaPacientes.find((paciente: tipoPaciente) => 
-        paciente.cpf === cpf && paciente.senha === senha
+        paciente.cpf === cpfLimpo && paciente.senha === senha
       );
       
       if (pacienteEncontrado) {
@@ -48,10 +67,11 @@ export default function LoginSenha() {
           placeholder="CPF"
           className="login-input"
           value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
+          onChange={(e) => handleCPFChange(e.target.value)}
+          maxLength={14}
         />
         <input
-          placeholder="Data de nascimento"
+          placeholder="senha"
           className="login-input-date"
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
