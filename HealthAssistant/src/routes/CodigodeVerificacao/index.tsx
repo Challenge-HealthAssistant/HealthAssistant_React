@@ -95,6 +95,7 @@ export default function CodigoVerificacao() {
               className="verificacao-input"
               type="text"
               inputMode="numeric"
+              title="number"
             />
           ))}
         </div>

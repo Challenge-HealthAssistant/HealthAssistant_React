@@ -41,7 +41,7 @@ export default function QuemSomos() {
       <Links />
       <div className="quemsomos-banner">
         
-        <button onClick={() => navigate('/')}
+        <button onClick={() => navigate('/home')}
         className="quemsomos-back-btn" aria-label="Voltar">
           ←
         </button>

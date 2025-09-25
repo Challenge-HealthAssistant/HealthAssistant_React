@@ -24,7 +24,7 @@ export default function Suporte() {
       <Links />
       
       <div className="suporte-banner">
-        <button onClick={() => navigate('/')} 
+        <button onClick={() => navigate('/home')} 
         className="suporte-back-btn" aria-label="Voltar">
           ←
         </button>

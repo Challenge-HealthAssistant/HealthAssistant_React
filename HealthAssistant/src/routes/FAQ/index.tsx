@@ -10,7 +10,7 @@ export default function Faq() {
       <Links />
       <div className="faq-banner">
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
           className="faq-back-btn mr-2 text-2xl hover:text-[#1de9b6]"
           aria-label="Voltar"
         >

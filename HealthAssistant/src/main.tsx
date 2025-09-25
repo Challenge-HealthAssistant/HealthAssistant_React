@@ -23,7 +23,8 @@ import Error from './routes/Error/index.tsx'
 
 const router = createBrowserRouter([
   {path: '/', element: <App />,errorElement:<Error />,children: [
-   {path: '/', element: <Home />},
+   {path: '/', element: <Login />},
+   {path: '/home', element: <Home />},
    {path: '/agendamentos', element: <Agendamentos />},
    {path: '/codigodeverificacao', element: <CodigoVerificacao />},
    {path: '/cadastro', element: <Cadastro />},

@@ -7,7 +7,7 @@ import suporte from "../../img/suporte.png";
 export default function Links() {
     return (
         <nav className="bottom-links">
-        <Link className="bottom-links-item" to='/'>
+        <Link className="bottom-links-item" to='/home'>
             <img src={home} alt="Início" className="bottom-links-icon" />
             Início
         </Link>
