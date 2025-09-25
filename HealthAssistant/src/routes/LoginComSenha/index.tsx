@@ -43,7 +43,7 @@ export default function LoginSenha() {
       if (pacienteEncontrado) {
         localStorage.setItem('pacienteLogadoId', pacienteEncontrado.id.toString());
         localStorage.setItem('pacienteLogadoNome', pacienteEncontrado.nome);
-        navigate("/");
+        navigate("/home");
       } else {
         setErro("CPF ou senha incorretos. Tente novamente.");
       }

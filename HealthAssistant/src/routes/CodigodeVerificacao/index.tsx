@@ -59,7 +59,7 @@ export default function CodigoVerificacao() {
     
     if (codigoCompleto === "123456") {
       // Código correto, redirecionar para a home
-      navigate("/");
+      navigate("/home");
     } else {
       // Código incorreto: mostrar erro e limpar caixas
       setErro("Código incorreto. Tente novamente.");
