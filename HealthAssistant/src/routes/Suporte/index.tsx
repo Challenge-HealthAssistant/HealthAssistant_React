@@ -24,40 +24,31 @@ export default function Suporte() {
       <Links />
       
       <div className="suporte-banner">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="suporte-back-btn" 
-          aria-label="Voltar"
-        >
+        <button onClick={() => navigate('/')} 
+        className="suporte-back-btn" aria-label="Voltar">
           ←
         </button>
         <h2 className="suporte-title">Suporte</h2>
       </div>
 
       <div className="suporte-content">
-        <button 
-          className="suporte-button"
-          onClick={handlePerguntasFrequentes}
-        >
+        <button className="suporte-button" onClick={handlePerguntasFrequentes}>
           Perguntas frequentes
         </button>
 
-        <button 
-          className="suporte-button"
-          onClick={handleLigarSuporte}
-        >
+        <button className="suporte-button" onClick={handleLigarSuporte}>
           Ligar para o suporte
         </button>
 
-        <button 
-          className="suporte-chat-button"
-          onClick={handleChatAssistente}
-        >
+        <button className="suporte-chat-button" onClick={handleChatAssistente}>
+
           <div className="suporte-chat-icon-bg">
             <img src={chatbotIcon} alt="Chatbot" className="suporte-chat-icon" />
           </div>
+          
           <span>Fale com o assistente</span>
         </button>
+        
       </div>
     </div>
   );

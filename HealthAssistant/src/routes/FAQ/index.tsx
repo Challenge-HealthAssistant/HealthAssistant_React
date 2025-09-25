@@ -4,12 +4,13 @@ import chatbot from "../../img/chatbot.png";
 
 export default function Faq() {
   const navigate = useNavigate();
+
   return (
     <div className="faq-bg">
       <Links />
       <div className="faq-banner">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           className="faq-back-btn mr-2 text-2xl hover:text-[#1de9b6]"
           aria-label="Voltar"
         >
@@ -18,6 +19,7 @@ export default function Faq() {
         <h2 className="faq-title">FAQ</h2>
       </div>
       <div className="faq-content">
+
         <div className="faq-card banner-limit">
           <div className="faq-card-title">
             Como eu recebo o lembrete da consulta?
@@ -53,6 +55,7 @@ export default function Faq() {
             <img src={chatbot} alt="logo do chatbot" className="faq-chatbot" />
           </button>
         </div>
+
       </div>
     </div>
   );
