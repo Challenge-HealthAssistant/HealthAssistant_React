@@ -46,6 +46,40 @@
     }
     
     /* ----------------- */
+    /* Agendamentos      */
+    /* ----------------- */
+    .agendamentos {
+      @apply bg-[#2196c9] min-h-screen flex flex-col;
+    }
+    .agendamentos-content {
+      @apply flex-1 p-6;
+    }
+    .agendamentos-card {
+      @apply bg-[#D9D9D9] rounded-lg p-4 mb-6;
+    }
+    .agendamentos-card-title {
+      @apply text-[#157AB9] font-semibold mb-2;
+    }
+    .agendamentos-card-text {
+      @apply text-[15px] text-[#222];
+    }
+    .agendamentos-recent {
+      @apply text-white text-center text-[15px];
+    }
+    .agendamentos-recent-title {
+      @apply font-semibold mb-2;
+    }
+    .agendar-banner {
+      @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
+    }
+    .agendar-back-btn {
+      @apply mr-2 text-2xl hover:text-[#1de9b6];
+    }
+    .agendar-title {
+      @apply text-xl font-semibold flex-1 text-center;
+    }
+
+    /* ----------------- */
     /* Footer           */
     /* ----------------- */
     .footer {

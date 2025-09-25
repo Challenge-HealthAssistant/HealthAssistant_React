@@ -7,7 +7,6 @@ export default function Agendamentos() {
     
   return (
     <div className="agendamentos">
-
       <Links />
       <div className="agendar-banner">
         <button 
@@ -19,18 +18,18 @@ export default function Agendamentos() {
         </button>
         <h2 className="agendar-title">Agendamentos</h2>
       </div>
-      <div className="flex-1 p-6">
-        <div className="bg-[#D9D9D9] rounded-lg p-4 mb-6">
-          <div className="text-[#157AB9] font-semibold mb-2">Próximas consultas</div>
-          <div className="text-[15px] text-[#222]">
+      <div className="agendamentos-content">
+        <div className="agendamentos-card">
+          <div className="agendamentos-card-title">Próximas consultas</div>
+          <div className="agendamentos-card-text">
             Data: 14/05/2025<br />
             Horário: 14:00<br />
             Teleconsulta<br />
             Unidade: IMREA Lirmaliz
           </div>
         </div>
-        <div className="text-white text-center text-[15px]">
-          <div className="font-semibold mb-2">Últimos acessos</div>
+        <div className="agendamentos-recent">
+          <div className="agendamentos-recent-title">Últimos acessos</div>
           você não possui acessos recentes
         </div>
       </div>
