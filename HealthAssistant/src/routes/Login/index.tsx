@@ -54,12 +54,19 @@ export default function Login() {
     
     try {
       // Buscar paciente diretamente (sem delay)
-      // Remove formatação para comparação
+      // Remove formatação do CPF para comparação
       const cpfLimpo = cpf.replace(/\D/g, '');
-      const dataLimpa = dataNascimento.replace(/\D/g, '');
+      // Mantém a data no formato DD/MM/AAAA para comparação
+      const dataFormatada = dataNascimento;
+      
+      console.log('Procurando por:', { 
+        cpf: cpfLimpo, 
+        data: dataFormatada,
+        pacientes: listaPacientes.map(p => ({ cpf: p.cpf, data: p.dataNascimento }))
+      });
       
       const pacienteEncontrado = listaPacientes.find((paciente: tipoPaciente) => 
-        paciente.cpf === cpfLimpo && paciente.dataNascimento === dataLimpa
+        paciente.cpf === cpfLimpo && paciente.dataNascimento === dataFormatada
       );
       
       if (pacienteEncontrado) {

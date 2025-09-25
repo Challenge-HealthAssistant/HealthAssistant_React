@@ -66,7 +66,7 @@ export default function Perfil() {
         <Links />
       <div className="perfil-banner">
         <button 
-          onClick={() => navigate(-1)} 
+          onClick={() => navigate('/')} 
           className="perfil-back-btn" 
           aria-label="Voltar"
         >
