@@ -8,10 +8,10 @@ export default function Error() {
     };
 
     return (
-        <div className="bg-red-500 min-h-screen flex flex-col justify-center items-center">
-            <h1 className="text-white text-4xl font-bold mb-4">404</h1>
-            <p className="text-white text-lg">Página não encontrada</p>
-            <button onClick={handleNavigateHome} className="mt-4 px-4 py-2 bg-white text-red-500 rounded">
+        <div className="error-panel">
+            <h1 className="error-title">404</h1>
+            <p className="error-message">Página não encontrada</p>
+            <button onClick={handleNavigateHome} className="error-back-link">
                 Voltar para a Home
             </button>
         </div>
