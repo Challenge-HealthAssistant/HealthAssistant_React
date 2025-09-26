@@ -11,7 +11,6 @@ export default function Home() {
   
   return (
     <div className="home-bg">
-      <Links />
       <div className="agendar-banner">
         <h2 className="agendar-title">Tela Inicial</h2>
       </div>
@@ -44,7 +43,8 @@ export default function Home() {
           </span>
           <span className="home-text">Resultados</span>
         </Link>
-      </div>      
+      </div>
+      <Links />     
     </div>
   );
 }

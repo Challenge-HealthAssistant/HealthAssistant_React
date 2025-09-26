@@ -53,7 +53,6 @@ export default function Agendamentos() {
 
   return (
     <div className="agendamentos">
-      <Links />
       <div className="agendar-banner">
         <button 
           onClick={() => navigate(-1)} 
@@ -103,6 +102,7 @@ export default function Agendamentos() {
           )}
         </div>
       </div>
+      <Links />
     </div>
   );
 }

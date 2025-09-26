@@ -21,7 +21,6 @@ export default function Suporte() {
 
   return (
     <div className="suporte-bg">
-      <Links />
       
       <div className="suporte-banner">
         <button onClick={() => navigate('/home')} 
@@ -50,6 +49,7 @@ export default function Suporte() {
         </button>
         
       </div>
+      <Links />
     </div>
   );
 }

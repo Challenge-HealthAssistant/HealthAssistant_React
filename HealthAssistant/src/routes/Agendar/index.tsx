@@ -10,7 +10,6 @@ export default function Agendar() {
 
   return (
     <div className="agendar-bg">
-      <Links />
       <div className="agendar-banner">
         <button 
           onClick={() => navigate(-1)} 
@@ -76,6 +75,7 @@ export default function Agendar() {
           </div>
         </div>
       </div>
+      <Links />
     </div>
   );
 }

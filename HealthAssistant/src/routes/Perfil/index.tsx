@@ -63,7 +63,6 @@ export default function Perfil() {
 
   return (
     <div className="perfil-bg">
-        <Links />
       <div className="perfil-banner">
         <button 
           onClick={() => navigate('/home')} 
@@ -144,6 +143,7 @@ export default function Perfil() {
           </div>
         )}
       </div>
+      <Links />
     </div>
   );
 }

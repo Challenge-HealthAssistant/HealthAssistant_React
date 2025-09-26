@@ -38,7 +38,7 @@ export default function QuemSomos() {
 
   return (    
     <div className="quemsomos-bg">
-      <Links />
+      
       <div className="quemsomos-banner">
         
         <button onClick={() => navigate('/home')}
@@ -68,6 +68,7 @@ export default function QuemSomos() {
           </div>
         ))}
       </div>
+      <Links />
     </div>
   );
 }

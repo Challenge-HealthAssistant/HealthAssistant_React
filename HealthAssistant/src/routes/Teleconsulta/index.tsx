@@ -10,7 +10,6 @@ export default function Teleconsulta() {
 
   return (
     <div className="agendar-bg">
-      <Links />
 
       {/* Banner */}
       <div className="agendar-banner">
@@ -59,6 +58,7 @@ export default function Teleconsulta() {
           </button>
         </div>
       </div>
+      <Links />
     </div>
   );
 }

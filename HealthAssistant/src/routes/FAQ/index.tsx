@@ -7,7 +7,6 @@ export default function Faq() {
 
   return (
     <div className="faq-bg">
-      <Links />
       <div className="faq-banner">
         <button
           onClick={() => navigate("/home")}
@@ -57,6 +56,7 @@ export default function Faq() {
         </div>
 
       </div>
+      <Links />
     </div>
   );
 }

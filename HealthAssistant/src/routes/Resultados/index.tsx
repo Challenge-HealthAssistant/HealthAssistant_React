@@ -57,7 +57,7 @@ export default function Resultados() {
   return (
     
     <div className="resultados">
-      <Links />
+      
       
       <div className="agendar-banner">
         <button 
@@ -90,6 +90,7 @@ export default function Resultados() {
           </div>
         ))}
       </div>
+      <Links />
     </div>
   );
 }
