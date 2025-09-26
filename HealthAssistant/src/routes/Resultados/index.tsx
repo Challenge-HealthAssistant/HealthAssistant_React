@@ -74,27 +74,27 @@ export default function Resultados() {
           <img 
             src={isHovered ? voltarVerde : voltar} 
             alt="Voltar" 
-            className="w-6 h-6 inline-block transition-all duration-200" 
+            className="back-btn-icon" 
           />
         </button>
         <h2 className="agendar-title">Resultados</h2>
       </div>
       
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="resultados-content">
         {resultados.map((grupo) => (
-          <div key={grupo.ano} className="mb-6">
-            <div className="text-white font-bold mb-2 text-lg">{grupo.ano}</div>
+          <div key={grupo.ano} className="resultados-year-group">
+            <div className="resultados-year-title">{grupo.ano}</div>
             {grupo.exames.map((exame) => (
               <div
                 key={exame.ficha}
-                className="bg-[#ffffff] text-black rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6]"
+                className="resultados-exam-card"
               >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-bold text-lg">{exame.data}</span>
-                  <span className="text-sm">Unidade: {exame.unidade}</span>
+                <div className="resultados-exam-header">
+                  <span className="resultados-exam-date">{exame.data}</span>
+                  <span className="resultados-exam-unit">Unidade: {exame.unidade}</span>
                 </div>
-                <div className="text-xs">Ficha: {exame.ficha}</div>
-                <div className="text-xs">Marca: {exame.marca}</div>
+                <div className="resultados-exam-info">Ficha: {exame.ficha}</div>
+                <div className="resultados-exam-info">Marca: {exame.marca}</div>
               </div>
             ))}
           </div>

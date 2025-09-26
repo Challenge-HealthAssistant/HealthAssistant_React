@@ -27,7 +27,7 @@ export default function Teleconsulta() {
           <img 
             src={isHovered ? voltarVerde : voltar} 
             alt="Voltar" 
-            className="w-6 h-6 inline-block transition-all duration-200" 
+            className="back-btn-icon" 
           />
         </button>
         <h2 className="agendar-title">Teleconsulta</h2>

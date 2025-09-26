@@ -137,32 +137,68 @@
     .quemsomos-back-btn {
       @apply mr-2 text-2xl hover:text-[#1de9b6];
     }
+
     .quemsomos-title {
       @apply text-xl font-semibold flex-1 text-center;
     }
     .quemsomos-content {
-      @apply flex-1 p-8 flex justify-center items-center;
+      @apply flex-1 p-4 sm:p-6 md:p-8 flex justify-center items-center min-h-0;
     }
     .quemsomos-cards-container {
-      @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center;
+      @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 justify-items-center w-full max-w-7xl;
     }
     .quemsomos-card {
-      @apply flex flex-col items-center justify-center bg-white text-[#222] p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-[#1976a5] w-80 h-80;
+      @apply flex flex-col items-center justify-center bg-white text-[#222] p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-[#1976a5] w-full max-w-xs sm:max-w-sm lg:max-w-md aspect-square;
     }
     .quemsomos-photo {
-      @apply w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-4 border-4 border-[#1976a5] shadow-md;
+      @apply w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover mb-2 sm:mb-3 lg:mb-4 border-2 sm:border-3 lg:border-4 border-[#1976a5] shadow-md;
     }
     .quemsomos-name {
-      @apply block text-xl font-bold text-center text-[#1976a5] mb-2;
+      @apply block text-sm sm:text-base md:text-lg lg:text-xl font-bold text-center text-[#1976a5] mb-1 sm:mb-2;
     }
     .quemsomos-info {
-      @apply text-center text-gray-600 mb-3;
+      @apply text-center text-gray-600 mb-2 sm:mb-3 text-xs sm:text-sm md:text-base;
     }
     .quemsomos-links {
-      @apply mt-3 flex gap-3 justify-center;
+      @apply mt-2 sm:mt-3 flex gap-2 sm:gap-3 justify-center flex-wrap;
     }
     .quemsomos-link {
-      @apply bg-[#1976a5] text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-[#46a2da] transition-colors duration-200 no-underline;
+      @apply bg-[#1976a5] text-white px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-[#46a2da] transition-colors duration-200 no-underline;
+    }
+    
+    /* ----------------- */
+    /* BOTÃO VOLTAR ICON */
+    /* ----------------- */
+    .back-btn-icon {
+      @apply w-6 h-6 inline-block transition-all duration-200;
+    }
+    
+    /* ----------------- */
+    /* RESULTADOS        */
+    /* ----------------- */
+    .resultados-content {
+      @apply flex-1 p-4 overflow-y-auto;
+    }
+    .resultados-year-group {
+      @apply mb-6;
+    }
+    .resultados-year-title {
+      @apply text-white font-bold mb-2 text-lg;
+    }
+    .resultados-exam-card {
+      @apply bg-[#ffffff] text-black rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6];
+    }
+    .resultados-exam-header {
+      @apply flex items-center gap-2 mb-1;
+    }
+    .resultados-exam-date {
+      @apply font-bold text-lg;
+    }
+    .resultados-exam-unit {
+      @apply text-sm;
+    }
+    .resultados-exam-info {
+      @apply text-xs;
     }
     
     /* ----------------- */

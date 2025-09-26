@@ -52,7 +52,7 @@ export default function QuemSomos() {
           <img 
             src={isHovered ? voltarVerde : voltar} 
             alt="Voltar" 
-            className="w-6 h-6 inline-block transition-all duration-200" 
+            className="back-btn-icon" 
           />
         </button>
 
@@ -71,7 +71,6 @@ export default function QuemSomos() {
 
                 <div className="quemsomos-links">
                   <a href={member.github} rel="noopener noreferrer" target="_blank" className="quemsomos-link">Github</a>
-                  <span>|</span>
                   <a href={member.linkedin} rel="noopener noreferrer" target="_blank" className="quemsomos-link">LinkedIn</a>
                 </div>
 
