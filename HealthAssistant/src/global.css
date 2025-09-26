@@ -52,13 +52,16 @@
     /* Agendamentos      */
     /* ----------------- */
     .agendamentos {
-      @apply bg-[#2196c9] min-h-screen flex flex-col;
+      @apply bg-[#2196c9] h-screen flex flex-col overflow-hidden;
     }
     .agendamentos-content {
-      @apply flex-1 p-6;
+      @apply flex-1 p-3 sm:p-6 overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .agendamentos-card {
-      @apply bg-[#D9D9D9] rounded-lg p-4 mb-6;
+      @apply bg-[#D9D9D9] rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 touch-manipulation;
     }
     .agendamentos-card-title {
       @apply text-[#157AB9] font-semibold mb-2;
@@ -126,7 +129,7 @@
     /* Quem Somos        */
     /* ----------------- */
     .quemsomos-bg {
-      @apply flex flex-col flex-1;
+      @apply flex flex-col h-screen overflow-hidden;
       background: #2179b0; /* fallback for old browsers */
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -142,28 +145,32 @@
       @apply text-xl font-semibold flex-1 text-center;
     }
     .quemsomos-content {
-      @apply flex-1 p-4 sm:p-6 md:p-8 flex justify-center items-center min-h-0;
+      @apply flex-1 p-4 sm:p-6 md:p-8 flex justify-center items-start overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-top: 1rem;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .quemsomos-cards-container {
-      @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 justify-items-center w-full max-w-7xl;
+      @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 justify-items-center w-full max-w-7xl py-2;
     }
     .quemsomos-card {
-      @apply flex flex-col items-center justify-center bg-white text-[#222] p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-[#1976a5] w-full max-w-xs sm:max-w-sm lg:max-w-md aspect-square;
+      @apply flex flex-col items-center justify-center bg-white text-[#222] p-2 sm:p-6 lg:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-[#1976a5] w-full max-w-[200px] sm:max-w-sm lg:max-w-md aspect-square;
     }
     .quemsomos-photo {
-      @apply w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover mb-2 sm:mb-3 lg:mb-4 border-2 sm:border-3 lg:border-4 border-[#1976a5] shadow-md;
+      @apply w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover mb-1 sm:mb-3 lg:mb-4 border-2 sm:border-3 lg:border-4 border-[#1976a5] shadow-md;
     }
     .quemsomos-name {
-      @apply block text-sm sm:text-base md:text-lg lg:text-xl font-bold text-center text-[#1976a5] mb-1 sm:mb-2;
+      @apply block text-xs sm:text-base md:text-lg lg:text-xl font-bold text-center text-[#1976a5] mb-1 sm:mb-2 leading-tight;
     }
     .quemsomos-info {
-      @apply text-center text-gray-600 mb-2 sm:mb-3 text-xs sm:text-sm md:text-base;
+      @apply text-center text-gray-600 mb-1 sm:mb-3 text-[10px] sm:text-sm md:text-base leading-tight;
     }
     .quemsomos-links {
-      @apply mt-2 sm:mt-3 flex gap-2 sm:gap-3 justify-center flex-wrap;
+      @apply mt-1 sm:mt-3 flex gap-1 sm:gap-3 justify-center flex-wrap;
     }
     .quemsomos-link {
-      @apply bg-[#1976a5] text-white px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-[#46a2da] transition-colors duration-200 no-underline;
+      @apply bg-[#1976a5] text-white px-1.5 py-0.5 sm:px-3 sm:py-2 rounded text-[9px] sm:text-sm font-medium hover:bg-[#46a2da] transition-colors duration-200 no-underline;
     }
     
     /* ----------------- */
@@ -177,25 +184,28 @@
     /* RESULTADOS        */
     /* ----------------- */
     .resultados-content {
-      @apply flex-1 p-4 overflow-y-auto;
+      @apply flex-1 p-2 sm:p-4 overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .resultados-year-group {
-      @apply mb-6;
+      @apply mb-4 sm:mb-6;
     }
     .resultados-year-title {
       @apply text-white font-bold mb-2 text-lg;
     }
     .resultados-exam-card {
-      @apply bg-[#ffffff] text-black rounded-lg p-4 mb-3 border-l-4 border-[#1de9b6];
+      @apply bg-[#ffffff] text-black rounded-lg p-3 sm:p-4 mb-2 sm:mb-3 border-l-4 border-[#1de9b6] touch-manipulation;
     }
     .resultados-exam-header {
-      @apply flex items-center gap-2 mb-1;
+      @apply flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1;
     }
     .resultados-exam-date {
-      @apply font-bold text-lg;
+      @apply font-bold text-base sm:text-lg;
     }
     .resultados-exam-unit {
-      @apply text-sm;
+      @apply text-xs sm:text-sm text-gray-600;
     }
     .resultados-exam-info {
       @apply text-xs;
@@ -205,7 +215,7 @@
     /* FAQ               */
     /* ----------------- */
     .faq-bg {
-      @apply flex flex-col flex-1;
+      @apply flex flex-col h-screen overflow-hidden;
       background: #2179b0; /* fallback for old browsers */
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -218,10 +228,13 @@
       @apply text-xl font-semibold uppercase flex-1 text-center;
     }
     .faq-content {
-      @apply flex-1 p-4 flex flex-col gap-4 items-center justify-center;
+      @apply flex-1 p-3 sm:p-4 flex flex-col gap-3 sm:gap-4 items-center overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .faq-card {
-      @apply bg-[#eaeaea] rounded-lg p-4 shadow;
+      @apply bg-[#eaeaea] rounded-lg p-3 sm:p-4 shadow touch-manipulation;
     }
     .banner-limit {
       @apply max-w-3xl mx-auto w-full;
@@ -249,7 +262,7 @@
     /* Suporte           */
     /* ----------------- */
     .suporte-bg {
-      @apply flex flex-col flex-1;
+      @apply flex flex-col h-screen overflow-hidden;
       background: #2179b0; /* fallback for old browsers */
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -264,13 +277,16 @@
       @apply text-xl font-semibold uppercase flex-1 text-center;
     }
     .suporte-content {
-      @apply flex-1 flex flex-col justify-center items-center gap-4 p-6;
+      @apply flex-1 flex flex-col justify-center items-center gap-3 sm:gap-4 p-3 sm:p-6 overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .suporte-button {
-      @apply w-full max-w-sm py-4 px-6 bg-[#eaeaea] text-[#1976a5] font-semibold text-lg rounded-lg border-none hover:bg-gray-100 transition-colors cursor-pointer;
+      @apply w-full max-w-sm py-3 sm:py-4 px-4 sm:px-6 bg-[#eaeaea] text-[#1976a5] font-semibold text-base sm:text-lg rounded-lg border-none hover:bg-gray-100 transition-colors cursor-pointer touch-manipulation;
     }
     .suporte-chat-button {
-      @apply w-full max-w-sm py-4 px-6 bg-[#2196c9] text-white font-semibold text-lg rounded-lg border-none hover:bg-[#18c7a3] transition-colors cursor-pointer flex items-center justify-center gap-3;
+      @apply w-full max-w-sm py-3 sm:py-4 px-4 sm:px-6 bg-[#2196c9] text-white font-semibold text-base sm:text-lg rounded-lg border-none hover:bg-[#18c7a3] transition-colors cursor-pointer flex items-center justify-center gap-2 sm:gap-3 touch-manipulation;
     }
     .suporte-chat-icon-bg {
       @apply flex items-center justify-center;
@@ -283,7 +299,7 @@
     /* Agendar           */
     /* ----------------- */
     .agendar-bg {
-      @apply flex flex-col flex-1;
+      @apply flex flex-col h-screen overflow-hidden;
       background: #2179b0; /* fallback for old browsers */
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -298,16 +314,19 @@
       @apply text-xl font-semibold flex-1 text-center;
     }
     .agendar-content {
-      @apply flex-1 p-6 flex flex-col items-center;
+      @apply flex-1 p-3 sm:p-6 flex flex-col items-center overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .agendar-subtitle {
       @apply text-white font-bold mb-4 uppercase text-sm mx-auto text-center;
     }
     .agendar-cards-container {
-      @apply w-full max-w-sm sm:max-w-md mx-auto space-y-6;
+      @apply w-full max-w-sm sm:max-w-md mx-auto space-y-4 sm:space-y-6;
     }
     .agendar-card {
-      @apply bg-[#eaeaea] rounded-lg p-4 w-full shadow-sm;
+      @apply bg-[#eaeaea] rounded-lg p-3 sm:p-4 w-full shadow-sm touch-manipulation;
     }
     .agendar-card-title {
       @apply text-[#1976a5] font-semibold mb-1 text-base;
@@ -344,7 +363,7 @@
      /* ----------------- */
 
      .resultados {
-      @apply bg-[#2196c9] flex flex-col flex-1;
+      @apply bg-[#2196c9] flex flex-col h-screen overflow-hidden;
       background: #2179b0; /* fallback for old browsers */
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */     
@@ -354,7 +373,10 @@
     /* Perfil            */
     /* ----------------- */
     .perfil-bg {
-      @apply bg-[#2196c9] flex flex-col flex-1;
+      @apply flex flex-col h-screen overflow-hidden;
+      background: #2179b0; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .perfil-banner {
       @apply flex items-center bg-[#1976a5] text-white m-0 py-3 px-4;
@@ -366,7 +388,10 @@
       @apply text-xl font-semibold flex-1 text-center;
     }
     .perfil-content {
-      @apply flex-1 p-4 flex flex-col items-center;
+      @apply flex-1 p-3 sm:p-4 flex flex-col items-center overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .perfil-card {
       @apply bg-[#eaeaea] rounded-lg p-6 w-full max-w-md mx-auto shadow-sm;
@@ -493,6 +518,9 @@
     /* ----------------------------- */
     .cadastro-container {
       @apply bg-[#2196c9] flex flex-col items-center flex-1 overflow-y-auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 0;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .cadastro-card {
       @apply bg-white mt-6 rounded-lg w-full max-w-sm sm:max-w-md md:max-w-lg p-4 sm:p-6 shadow-lg;
@@ -549,7 +577,7 @@
     /* Teleconsulta      */
     /* ----------------- */
     .teleconsulta-bg {
-    @apply flex flex-col flex-1;
+    @apply flex flex-col h-screen overflow-hidden;
     background: #2179b0; /* fallback */
     background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed);
     background: linear-gradient(to right, #2179b0, #6dd5ed);
@@ -565,16 +593,19 @@
     @apply text-xl font-semibold flex-1 text-center;
     }
     .teleconsulta-content {
-    @apply flex-1 p-6 flex flex-col items-center;
+    @apply flex-1 p-3 sm:p-6 flex flex-col items-center overflow-y-auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     }
     .teleconsulta-subtitle {
     @apply text-white font-bold mb-4 uppercase text-sm mx-auto text-center;
     }
     .teleconsulta-cards-container {
-    @apply w-full max-w-sm sm:max-w-md mx-auto space-y-6;
+    @apply w-full max-w-sm sm:max-w-md mx-auto space-y-4 sm:space-y-6;
     }
     .teleconsulta-card {
-    @apply bg-[#eaeaea] rounded-lg p-4 w-full shadow-sm;
+    @apply bg-[#eaeaea] rounded-lg p-3 sm:p-4 w-full shadow-sm touch-manipulation;
     }
     .teleconsulta-card-title {
     @apply text-[#1976a5] font-semibold mb-1 text-base;
