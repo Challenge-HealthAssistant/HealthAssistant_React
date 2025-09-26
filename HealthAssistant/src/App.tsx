@@ -8,7 +8,7 @@ import { Header } from "./components/Header/header";
 export default function App() {
   
   return (
-    <div className='pg-bg'>
+    <div className='page-bg'>
       <Header />
       <Outlet />
       <Footer />
