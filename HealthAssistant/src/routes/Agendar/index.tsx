@@ -1,10 +1,14 @@
 
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Links from "../../components/Links/Links";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 
 export default function Agendar() {
 
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
 
 
@@ -15,8 +19,14 @@ export default function Agendar() {
           onClick={() => navigate(-1)} 
           className="agendar-back-btn" 
           aria-label="Voltar"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          ←
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="agendar-title">Agendar</h2>
       </div>

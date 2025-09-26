@@ -1,9 +1,13 @@
 import Links from "../../components/Links/Links";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import chatbotIcon from "../../img/chatbot.png";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 
 export default function Suporte() {
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   function handlePerguntasFrequentes() {
     navigate("/faq");
@@ -24,8 +28,14 @@ export default function Suporte() {
       
       <div className="suporte-banner">
         <button onClick={() => navigate('/home')} 
-        className="suporte-back-btn" aria-label="Voltar">
-          ←
+        className="suporte-back-btn" aria-label="Voltar"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="suporte-title">Suporte</h2>
       </div>

@@ -1,9 +1,12 @@
 
 import Links from "../../components/Links/Links";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import pietroImg from '../../img/pietro.jpg';
 import leonardoImg from '../../img/leonardo.png';
 import arthurImg from '../../img/arthur.jpg';
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 
 const team = [
   {
@@ -35,6 +38,7 @@ const team = [
 export default function QuemSomos() {
 
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (    
     <div className="quemsomos-bg">
@@ -42,8 +46,14 @@ export default function QuemSomos() {
       <div className="quemsomos-banner">
         
         <button onClick={() => navigate('/home')}
-        className="quemsomos-back-btn" aria-label="Voltar">
-          ←
+        className="quemsomos-back-btn" aria-label="Voltar"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
 
         <h2 className="quemsomos-title">Quem Somos</h2>

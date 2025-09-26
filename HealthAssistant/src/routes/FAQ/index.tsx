@@ -1,19 +1,28 @@
 import Links from "../../components/Links/Links";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import chatbot from "../../img/chatbot.png";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 
 export default function Faq() {
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="faq-bg">
       <div className="faq-banner">
         <button
           onClick={() => navigate("/home")}
-          className="faq-back-btn mr-2 text-2xl hover:text-[#1de9b6]"
           aria-label="Voltar"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          ←
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="faq-title">FAQ</h2>
       </div>

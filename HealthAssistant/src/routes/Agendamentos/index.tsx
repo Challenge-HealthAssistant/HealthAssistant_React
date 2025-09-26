@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 import Links from "../../components/Links/Links";
 import { useState, useEffect } from "react";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoAgendamento } from "../../types/tipoAgendamento";
 import { listaAgendamentos } from "../../data/listaAgendamento";
 
@@ -8,6 +10,7 @@ export default function Agendamentos() {
   const navigate = useNavigate();
   const [proximosAgendamentos, setProximosAgendamentos] = useState<tipoAgendamento[]>([]);
   const [historico, setHistorico] = useState<tipoAgendamento[]>([]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const getAgendamentosPorPaciente = (pacienteId: number) => {
     return listaAgendamentos.filter(
@@ -58,8 +61,14 @@ export default function Agendamentos() {
           onClick={() => navigate(-1)} 
           className="agendar-back-btn" 
           aria-label="Voltar"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          ←
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="agendar-title">Agendamentos</h2>
       </div>

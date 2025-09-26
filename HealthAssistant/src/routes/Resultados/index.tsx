@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import Links from "../../components/Links/Links";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 
 const resultados = [
   {
@@ -53,6 +56,7 @@ const resultados = [
 export default function Resultados() {
 
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     
@@ -64,8 +68,14 @@ export default function Resultados() {
           onClick={() => navigate(-1)} 
           className="agendar-back-btn" 
           aria-label="Voltar"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          ←
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="agendar-title">Resultados</h2>
       </div>

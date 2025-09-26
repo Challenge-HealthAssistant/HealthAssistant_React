@@ -1,6 +1,8 @@
 import Links from "../../components/Links/Links";
 import { useNavigate, useParams } from "react-router";
 import { useState, useEffect } from "react";
+import voltar from "../../img/voltar.png";
+import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoPaciente } from "../../types/tipoPaciente";
 import { listaPacientes } from "../../data/Pacientes";
 
@@ -10,6 +12,7 @@ export default function Perfil() {
   
   const [perfil, setPerfil] = useState<tipoPaciente | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     
@@ -68,8 +71,14 @@ export default function Perfil() {
           onClick={() => navigate('/home')} 
           className="perfil-back-btn" 
           aria-label="Voltar"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          ←
+          <img 
+            src={isHovered ? voltarVerde : voltar} 
+            alt="Voltar" 
+            className="w-6 h-6 inline-block transition-all duration-200" 
+          />
         </button>
         <h2 className="perfil-title">Perfil</h2>
       </div>
