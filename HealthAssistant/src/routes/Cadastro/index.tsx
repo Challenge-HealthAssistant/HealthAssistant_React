@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { listaPacientes } from "../../data/Pacientes";
+import { listaPacientes } from "../../data/listaPaciente";
 import type { tipoPaciente } from "../../types/tipoPaciente";
 
 export default function Cadastro() {

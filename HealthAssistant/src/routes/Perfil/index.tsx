@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoPaciente } from "../../types/tipoPaciente";
-import { listaPacientes } from "../../data/Pacientes";
+import { listaPacientes } from "../../data/listaPaciente";
 
 export default function Perfil() {
   const navigate = useNavigate();
