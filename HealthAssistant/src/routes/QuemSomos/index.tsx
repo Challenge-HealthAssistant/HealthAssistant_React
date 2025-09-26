@@ -60,23 +60,25 @@ export default function QuemSomos() {
       </div>
 
       <div className="quemsomos-content">
-        {team.map((member) => (
-          <div key={member.rm} className="quemsomos-card">
-            <img src={member.photo} alt={member.name} className="quemsomos-photo" />
-            <div className="quemsomos-info">
-              <strong className="quemsomos-name">{member.name}</strong>
-              <div>RM: {member.rm}</div>
-              <div>{member.group}</div>
+        <div className="quemsomos-cards-container">
+          {team.map((member) => (
+            <div key={member.rm} className="quemsomos-card">
+              <img src={member.photo} alt={member.name} className="quemsomos-photo" />
+              <div className="quemsomos-info">
+                <strong className="quemsomos-name">{member.name}</strong>
+                <div>RM: {member.rm}</div>
+                <div>{member.group}</div>
 
-              <div className="quemsomos-links">
-                <a href={member.github} rel="noopener noreferrer" target="_blank" className="quemsomos-link">Github</a>
-                <span>|</span>
-                <a href={member.linkedin} rel="noopener noreferrer" target="_blank" className="quemsomos-link">LinkedIn</a>
+                <div className="quemsomos-links">
+                  <a href={member.github} rel="noopener noreferrer" target="_blank" className="quemsomos-link">Github</a>
+                  <span>|</span>
+                  <a href={member.linkedin} rel="noopener noreferrer" target="_blank" className="quemsomos-link">LinkedIn</a>
+                </div>
+
               </div>
-
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <Links />
     </div>
