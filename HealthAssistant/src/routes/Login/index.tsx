@@ -49,39 +49,36 @@ export default function Login() {
   }
 
   async function handleLogin() {
-    setErro("");
-    setCarregando(true);
-    
-    try {
-      // Buscar paciente diretamente (sem delay)
-      // Remove formatação do CPF para comparação
-      const cpfLimpo = cpf.replace(/\D/g, '');
-      // Mantém a data no formato DD/MM/AAAA para comparação
-      const dataFormatada = dataNascimento;
-      
-      console.log('Procurando por:', { 
-        cpf: cpfLimpo, 
-        data: dataFormatada,
-        pacientes: listaPacientes.map(p => ({ cpf: p.cpf, data: p.dataNascimento }))
-      });
-      
-      const pacienteEncontrado = listaPacientes.find((paciente: tipoPaciente) => 
-        paciente.cpf === cpfLimpo && paciente.dataNascimento === dataFormatada
-      );
-      
-      if (pacienteEncontrado) {
-        localStorage.setItem('pacienteLogadoId', pacienteEncontrado.id.toString());
-        localStorage.setItem('pacienteLogadoNome', pacienteEncontrado.nome);
-        navigate("/codigodeverificacao");
-      } else {
-        setErro("CPF ou data de nascimento incorretos. Tente novamente.");
-      }
-    } catch (error) {
-      setErro("Erro interno. Tente novamente.");
-    } finally {
-      setCarregando(false);
+  setErro("");
+  setCarregando(true);
+
+  try {
+    const response = await fetch("http://localhost:8080/pacientes/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cpf: cpf.replace(/\D/g, ""), // remove pontos e traços
+        dataNascimento: dataNascimento.split("/").reverse().join("-"), // de DD/MM/AAAA para AAAA-MM-DD
+      }),
+    });
+
+    if (response.ok) {
+      const paciente = await response.json();
+      localStorage.setItem("pacienteLogadoId", paciente.idPaciente.toString());
+      localStorage.setItem("pacienteLogadoNome", paciente.nome);
+      navigate("/codigodeverificacao");
+    } else {
+      setErro("CPF ou data de nascimento incorretos. Tente novamente.");
     }
+  } catch (error) {
+    console.error("Erro ao conectar à API:", error);
+    setErro("Erro de conexão com o servidor.");
+  } finally {
+    setCarregando(false);
   }
+}
 
   return (
     <div className="login-bg">

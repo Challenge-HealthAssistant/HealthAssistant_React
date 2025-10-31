@@ -4,65 +4,55 @@ import { useState, useEffect } from "react";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoPaciente } from "../../types/tipoPaciente";
-import { listaPacientes } from "../../data/listaPaciente";
+import { getPacienteById } from "../../data/api"; // 👈 novo import
 
 export default function Perfil() {
   const navigate = useNavigate();
-  const { id } = useParams(); // useParams para pegar ID da URL - Exemplo: /perfil/2
+  const { id } = useParams();
   
   const [perfil, setPerfil] = useState<tipoPaciente | null>(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    
-    // Usar ID da URL se disponível, senão usar localStorage
-    let pacienteLogadoId: number;
-    
+    let pacienteId: number;
+
     if (id) {
-      // Se há ID na URL, usar ele
-      pacienteLogadoId = Number(id);
+      pacienteId = Number(id);
     } else {
-      // Senão, pegar do localStorage (comportamento atual)
-      const pacienteLogadoIdStr = localStorage.getItem('pacienteLogadoId');
-      
-      if (!pacienteLogadoIdStr) {
-        // Se não há paciente logado, redirecionar para login
-        navigate('/login');
+      const pacienteIdStr = localStorage.getItem("pacienteLogadoId");
+      if (!pacienteIdStr) {
+        navigate("/login");
         return;
       }
-      
-      pacienteLogadoId = Number(pacienteLogadoIdStr);
+      pacienteId = Number(pacienteIdStr);
     }
-    
-    // Simular delay de carregamento 
-    setTimeout(() => {
-      const pacienteLogado = listaPacientes.find((paciente: tipoPaciente) => paciente.id === pacienteLogadoId);
-      
-      if (pacienteLogado) {
-        setPerfil(pacienteLogado);
-      } else {
-        // Se paciente não encontrado, limpar dados e ir para login
-        localStorage.removeItem('pacienteLogadoId');
-        localStorage.removeItem('pacienteLogadoNome');
-        navigate('/login');
-      }
-      setLoading(false);
-    }, 600);
-  }, [navigate, id]); // Adicionar id como dependência
+
+    // Chama a API real do Quarkus
+    getPacienteById(pacienteId)
+      .then((data) => {
+        setPerfil(data);
+      })
+      .catch((error) => {
+        console.error("Erro ao carregar paciente:", error);
+        localStorage.removeItem("pacienteLogadoId");
+        localStorage.removeItem("pacienteLogadoNome");
+        navigate("/login");
+      })
+      .finally(() => setLoading(false));
+  }, [navigate, id]);
 
   function handleSair() {
-    // Limpar dados do usuário logado
-    localStorage.removeItem('pacienteLogadoId');
-    localStorage.removeItem('pacienteLogadoNome');
-    
-    // Redirecionar para login
+    localStorage.removeItem("pacienteLogadoId");
+    localStorage.removeItem("pacienteLogadoNome");
     navigate("/login");
   }
 
   function handleEditar() {
     alert("Funcionalidade de edição será implementada");
   }
+
+  // Resto do JSX permanece igual
 
   return (
     <div className="perfil-bg">
@@ -125,15 +115,11 @@ export default function Perfil() {
             </div>
 
             <div className="perfil-field">
-              <label className="perfil-label">Endereço</label>
-              <div className="perfil-value">{perfil.endereco}</div>
+              <label className="perfil-label">cuidador</label>
+              <div className="perfil-value">{perfil.cuidador}</div>
             </div>
 
-            <div className="perfil-field">
-              <label className="perfil-label">Bairro</label>
-              <div className="perfil-value">{perfil.bairro}</div>
-            </div>
-
+            
             <div className="perfil-buttons">
               <button 
                 className="perfil-btn-editar"

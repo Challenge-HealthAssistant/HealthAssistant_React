@@ -1,11 +1,10 @@
-export type tipoPaciente = {
-    id: number;
-    nome: string;
-    dataNascimento: string;
-    cpf: string;
-    telefone: string;
-    senha: string;
-    email: string;
-    endereco: string;
-    bairro: string;
-};
+export interface tipoPaciente {
+  idPaciente: number;
+  nome: string;
+  cpf: string;
+  dataNascimento: string;
+  telefone: string;
+  cuidador?: string;
+  email: string;
+  senha?: string;
+}
