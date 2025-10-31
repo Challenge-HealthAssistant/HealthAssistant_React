@@ -1,191 +1,178 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { listaPacientes } from "../../data/listaPaciente";
-import type { tipoPaciente } from "../../types/tipoPaciente";
 
 export default function Cadastro() {
   const navigate = useNavigate();
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
-  const [sexo, setSexo] = useState("Masculino");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
+  const [sucesso, setSucesso] = useState("");
   const [carregando, setCarregando] = useState(false);
 
+  // -------------------------
+  // Máscaras e formatações
+  // -------------------------
   function formatarCPF(value: string) {
-    const apenasNumeros = value.replace(/\D/g, '');
+    const apenasNumeros = value.replace(/\D/g, "");
     const limitado = apenasNumeros.slice(0, 11);
-    return limitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    return limitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
 
   function formatarData(value: string) {
-    const apenasNumeros = value.replace(/\D/g, '');
+    const apenasNumeros = value.replace(/\D/g, "");
     const limitado = apenasNumeros.slice(0, 8);
-    
+
     if (limitado.length >= 5) {
-      return limitado.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
+      return limitado.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
     } else if (limitado.length >= 3) {
-      return limitado.replace(/(\d{2})(\d{2})/, '$1/$2/');
+      return limitado.replace(/(\d{2})(\d{2})/, "$1/$2/");
     } else {
       return limitado;
     }
   }
 
   function formatarTelefone(value: string) {
-    const apenasNumeros = value.replace(/\D/g, '');
+    const apenasNumeros = value.replace(/\D/g, "");
     const limitado = apenasNumeros.slice(0, 11);
-    
+
     if (limitado.length <= 10) {
-      return limitado.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+      return limitado.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
     } else {
-      return limitado.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      return limitado.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
     }
   }
 
+  // -------------------------
+  // Handlers de campos
+  // -------------------------
   function handleCPFChange(value: string) {
-    const cpfFormatado = formatarCPF(value);
-    setCpf(cpfFormatado);
+    setCpf(formatarCPF(value));
     if (erro) setErro("");
   }
 
   function handleDataChange(value: string) {
-    const dataFormatada = formatarData(value);
-    setDataNascimento(dataFormatada);
+    setDataNascimento(formatarData(value));
     if (erro) setErro("");
   }
 
   function handleTelefoneChange(value: string) {
-    const telefoneFormatado = formatarTelefone(value);
-    setTelefone(telefoneFormatado);
+    setTelefone(formatarTelefone(value));
     if (erro) setErro("");
   }
 
+  // -------------------------
+  // Validação dos campos
+  // -------------------------
   function validarCampos() {
-    if (!nomeCompleto.trim()) {
-      setErro("Nome completo é obrigatório.");
-      return false;
-    }
-
-    const nomePartes = nomeCompleto.trim().split(' ').filter(parte => parte.length > 0);
-    if (nomePartes.length < 2) {
-      setErro("Digite seu nome completo (nome e sobrenome).");
-      return false;
-    }
-
-    if (!cpf.trim()) {
-      setErro("CPF é obrigatório.");
-      return false;
-    }
-
-    const cpfLimpo = cpf.replace(/\D/g, '');
-    if (cpfLimpo.length !== 11) {
-      setErro("CPF deve ter 11 dígitos.");
-      return false;
-    }
-
-    // Verificar se CPF já existe
-    const cpfExistente = listaPacientes.find(paciente => paciente.cpf === cpfLimpo);
-    if (cpfExistente) {
-      setErro("CPF já cadastrado no sistema.");
-      return false;
-    }
-
-    if (!dataNascimento.trim()) {
-      setErro("Data de nascimento é obrigatória.");
-      return false;
-    }
-
-    if (!telefone.trim()) {
-      setErro("Telefone é obrigatório.");
-      return false;
-    }
-
-    const telefoneLimpo = telefone.replace(/\D/g, '');
-    if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
-      setErro("Telefone deve ter 10 ou 11 dígitos.");
-      return false;
-    }
-
-    if (!email.trim()) {
-      setErro("Email é obrigatório.");
-      return false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setErro("Digite um email válido.");
-      return false;
-    }
-
-    // Verificar se email já existe
-    const emailExistente = listaPacientes.find(paciente => paciente.email.toLowerCase() === email.toLowerCase());
-    if (emailExistente) {
-      setErro("Email já cadastrado no sistema.");
-      return false;
-    }
-
-    if (!senha.trim()) {
-      setErro("Senha é obrigatória.");
-      return false;
-    }
-
-    if (senha.length < 6) {
-      setErro("Senha deve ter pelo menos 6 caracteres.");
-      return false;
-    }
-
-    if (senha !== confirmarSenha) {
-      setErro("As senhas não coincidem.");
-      return false;
-    }
-
+    if (!nomeCompleto.trim()) return setErro("Nome completo é obrigatório."), false;
+    if (!cpf.trim()) return setErro("CPF é obrigatório."), false;
+    if (cpf.replace(/\D/g, "").length !== 11) return setErro("CPF deve ter 11 dígitos."), false;
+    if (!dataNascimento.trim()) return setErro("Data de nascimento é obrigatória."), false;
+    if (!telefone.trim()) return setErro("Telefone é obrigatório."), false;
+    if (!email.trim()) return setErro("E-mail é obrigatório."), false;
     return true;
   }
 
+  // -------------------------
+  // Envio para o backend
+  // -------------------------
   async function handleCadastro() {
     setErro("");
-    
-    if (!validarCampos()) {
-      return;
-    }
+    setSucesso("");
+    if (!validarCampos()) return;
 
     setCarregando(true);
-    
+
     try {
-      // Simular processo de cadastro
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // ✅ Validação extra antes de enviar
+      const cpfLimpo = cpf.replace(/\D/g, "");
+      const telefoneLimpo = telefone.replace(/\D/g, "");
       
-      // Criar novo paciente
-      const novoId = Math.max(...listaPacientes.map(p => p.id)) + 1;
-      const novoPaciente: tipoPaciente = {
-        id: novoId,
-        nome: nomeCompleto,
-        dataNascimento: dataNascimento.replace(/\D/g, ''), // Salvar sem formatação
-        cpf: cpf.replace(/\D/g, ''), // Salvar sem formatação
-        telefone: telefone,
-        senha: senha, // Usar senha digitada pelo usuário
-        email: email, // Usar email digitado pelo usuário
-        endereco: "Endereço não informado",
-        bairro: "Bairro não informado",
+      // Validações específicas para o backend Java
+      if (cpfLimpo.length !== 11) {
+        setErro("CPF deve ter exatamente 11 dígitos.");
+        setCarregando(false);
+        return;
+      }
+      
+      if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+        setErro("Telefone deve ter 10 ou 11 dígitos.");
+        setCarregando(false);
+        return;
+      }
+      
+      // Verifica se são apenas números válidos
+      if (!/^\d+$/.test(cpfLimpo) || !/^\d+$/.test(telefoneLimpo)) {
+        setErro("CPF e telefone devem conter apenas números.");
+        setCarregando(false);
+        return;
+      }
+
+      const novoPaciente = {
+        nome: nomeCompleto.trim(),
+        cpf: cpfLimpo, // ✅ Garantido que são só números
+        dataNascimento: dataNascimento.split("/").reverse().join("-"),
+        telefone: telefoneLimpo, // ✅ Garantido que são só números
+        possuiCuidador: false,
+        email: email.trim().toLowerCase(),
       };
-      
-      // Adicionar à lista
-      listaPacientes.push(novoPaciente);
-      
-      // Salvar dados no localStorage para login
-      localStorage.setItem('pacienteLogadoId', novoPaciente.id.toString());
-      localStorage.setItem('pacienteLogadoNome', novoPaciente.nome);
-      
-      
-      // Navegar para verificação de código
-      navigate("/codigodeverificacao");
-      
+
+      console.log("Dados sendo enviados:", novoPaciente);
+
+      const response = await fetch("http://localhost:8080/pacientes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(novoPaciente),
+      });
+
+      console.log("Status da resposta:", response.status);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Resposta da API:", data);
+
+        setErro("");
+        setSucesso("Cadastro realizado com sucesso!");
+
+        // Salva dados
+        localStorage.setItem("pacienteLogadoId", data.idPaciente.toString());
+        localStorage.setItem("pacienteLogadoNome", data.nome);
+
+        // Limpa campos
+        setNomeCompleto("");
+        setCpf("");
+        setDataNascimento("");
+        setTelefone("");
+        setEmail("");
+
+        setTimeout(() => navigate("/codigodeverificacao"), 2000);
+        
+      } else {
+        const errorText = await response.text();
+        console.log("Erro da API:", errorText);
+        
+        // ✅ Tratamento mais específico baseado no seu backend
+        if (response.status === 400) {
+          if (errorText.includes("CPF ou e-mail já cadastrados")) {
+            setErro("CPF ou e-mail já cadastrados no sistema.");
+          } else if (errorText.includes("formato inválido")) {
+            setErro("CPF ou telefone em formato inválido.");
+          } else {
+            setErro("Dados inválidos. Verifique os campos.");
+          }
+        } else {
+          setErro(`Erro ${response.status}: ${errorText}`);
+        }
+      }
     } catch (error) {
-      setErro("Erro interno. Tente novamente.");
+      console.error("Erro:", error);
+      setErro("Falha ao conectar com o servidor.");
     } finally {
       setCarregando(false);
     }
@@ -195,114 +182,86 @@ export default function Cadastro() {
     navigate("/login");
   }
 
+  // -------------------------
+  // Renderização do formulário
+  // -------------------------
   return (
     <div className="cadastro-container">
       <div className="cadastro-card">
-        <h2 className="cadastro-header">
-          Faça seu cadastro
-        </h2>
-        <div className="cadastro-label">
-          Precisamos dos seus dados para cadastro
-        </div>
-        
-        <input
-          placeholder="Nome completo"
-          className="cadastro-input"
-          value={nomeCompleto}
-          onChange={(e) => setNomeCompleto(e.target.value)}
-        />
-        
-        <input
-          placeholder="CPF"
-          className="cadastro-input"
-          value={cpf}
-          onChange={(e) => handleCPFChange(e.target.value)}
-          maxLength={14}
-        />
-        
-        <input
-          placeholder="Data de nascimento"
-          className="cadastro-input"
-          value={dataNascimento}
-          onChange={(e) => handleDataChange(e.target.value)}
-          maxLength={10}
-        />
-        
-        <div className="cadastro-sexo-container">
-          <div className="cadastro-sexo-label">Sexo biológico</div>
-          <div className="cadastro-sexo-buttons">
-            <button
-              className={`cadastro-sexo-button ${
-                sexo === "Masculino"
-                  ? "cadastro-sexo-button-selected"
-                  : "cadastro-sexo-button-unselected"
-              }`}
-              onClick={() => setSexo("Masculino")}
-              type="button"
-            >
-              Masculino
-            </button>
-            <button
-              className={`cadastro-sexo-button ${
-                sexo === "Feminino"
-                  ? "cadastro-sexo-button-selected"
-                  : "cadastro-sexo-button-unselected"
-              }`}
-              onClick={() => setSexo("Feminino")}
-              type="button"
-            >
-              Feminino
-            </button>
-          </div>
-        </div>
-        
-        <input
-          placeholder="Número de telefone"
-          className="cadastro-input"
-          value={telefone}
-          onChange={(e) => handleTelefoneChange(e.target.value)}
-          maxLength={15}
-        />
-        
-        <input
-          placeholder="Email"
-          type="email"
-          className="cadastro-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        
-        <input
-          placeholder="Senha (mínimo 6 caracteres)"
-          type="password"
-          className="cadastro-input"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-        />
-        
-        <input
-          placeholder="Confirmar senha"
-          type="password"
-          className="cadastro-input-last"
-          value={confirmarSenha}
-          onChange={(e) => setConfirmarSenha(e.target.value)}
-        />
-        
-        {erro && (
-          <div className="cadastro-erro">
-            <span className="cadastro-erro-texto">{erro}</span>
-          </div>
-        )}
-        
-        <button 
-          className={`cadastro-button-primary ${carregando ? 'carregando' : ''}`}
-          onClick={handleCadastro}
-          disabled={carregando}
+        <h2 className="cadastro-header">Faça seu cadastro</h2>
+        <div className="cadastro-label">Precisamos dos seus dados para cadastro</div>
+
+        {/* ✅ Adicione a tag <form> */}
+        <form onSubmit={(e) => { e.preventDefault(); handleCadastro(); }}>
+          <input
+            placeholder="Nome completo"
+            className="cadastro-input"
+            value={nomeCompleto}
+            onChange={(e) => setNomeCompleto(e.target.value)}
+            required
+          />
+
+          <input
+            placeholder="CPF"
+            className="cadastro-input"
+            value={cpf}
+            onChange={(e) => handleCPFChange(e.target.value)}
+            maxLength={14}
+            required
+          />
+
+          <input
+            placeholder="Data de nascimento (DD/MM/AAAA)"
+            className="cadastro-input"
+            value={dataNascimento}
+            onChange={(e) => handleDataChange(e.target.value)}
+            maxLength={10}
+            required
+          />
+
+          <input
+            placeholder="Telefone"
+            className="cadastro-input"
+            value={telefone}
+            onChange={(e) => handleTelefoneChange(e.target.value)}
+            maxLength={15}
+            required
+          />
+
+          <input
+            placeholder="E-mail"
+            type="email"
+            className="cadastro-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          {erro && (
+            <div className="cadastro-erro">
+              <span className="cadastro-erro-texto">{erro}</span>
+            </div>
+          )}
+          {sucesso && (
+            <div className="cadastro-sucesso">
+              <span className="cadastro-sucesso-texto">{sucesso}</span>
+            </div>
+          )}
+
+          <button
+            type="submit" // ✅ Tipo submit
+            className={`cadastro-button-primary ${carregando ? "carregando" : ""}`}
+            disabled={carregando}
+          >
+            {carregando ? "Cadastrando..." : "Cadastrar"}
+          </button>
+        </form>
+
+        <button
+          type="button"
+          className="cadastro-button-secondary"
+          onClick={handleVoltar}
         >
-          {carregando ? "Cadastrando..." : "Cadastrar"}
-        </button>
-        
-        <button className="cadastro-button-secondary" onClick={handleVoltar}>
           Voltar
         </button>
       </div>
