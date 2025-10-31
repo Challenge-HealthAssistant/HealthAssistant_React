@@ -87,7 +87,7 @@ export default function Cadastro() {
     setCarregando(true);
 
     try {
-      // ✅ Validação extra antes de enviar
+      // Validação extra antes de enviar
       const cpfLimpo = cpf.replace(/\D/g, "");
       const telefoneLimpo = telefone.replace(/\D/g, "");
       
@@ -113,9 +113,9 @@ export default function Cadastro() {
 
       const novoPaciente = {
         nome: nomeCompleto.trim(),
-        cpf: cpfLimpo, // ✅ Garantido que são só números
+        cpf: cpfLimpo, //  Garantido que são só números
         dataNascimento: dataNascimento.split("/").reverse().join("-"),
-        telefone: telefoneLimpo, // ✅ Garantido que são só números
+        telefone: telefoneLimpo, // Garantido que são só números
         possuiCuidador: false,
         email: email.trim().toLowerCase(),
       };
@@ -157,7 +157,7 @@ export default function Cadastro() {
         const errorText = await response.text();
         console.log("Erro da API:", errorText);
         
-        // ✅ Tratamento mais específico baseado no seu backend
+        //  Tratamento mais específico baseado no seu backend
         if (response.status === 400) {
           if (errorText.includes("CPF ou e-mail já cadastrados")) {
             setErro("CPF ou e-mail já cadastrados no sistema.");
@@ -191,7 +191,7 @@ export default function Cadastro() {
         <h2 className="cadastro-header">Faça seu cadastro</h2>
         <div className="cadastro-label">Precisamos dos seus dados para cadastro</div>
 
-        {/* ✅ Adicione a tag <form> */}
+        {/*  Adicione a tag <form> */}
         <form onSubmit={(e) => { e.preventDefault(); handleCadastro(); }}>
           <input
             placeholder="Nome completo"
@@ -249,7 +249,7 @@ export default function Cadastro() {
           )}
 
           <button
-            type="submit" // ✅ Tipo submit
+            type="submit" // Tipo submit
             className={`cadastro-button-primary ${carregando ? "carregando" : ""}`}
             disabled={carregando}
           >
