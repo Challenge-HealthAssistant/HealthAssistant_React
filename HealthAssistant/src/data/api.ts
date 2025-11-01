@@ -1,5 +1,6 @@
 // src/data/api.ts
 import type { tipoCuidador } from "../types/tipoCuidador";
+import type { tipoConsulta } from "../types/tipoConsulta";
 
 export const API_BASE_URL = "http://localhost:8080"; 
 
@@ -103,4 +104,73 @@ export async function updateCuidador(id: number, cuidador: Omit<tipoCuidador, 'i
   }
 
   return await response.json();
+}
+
+// =====================
+// CONSULTAS FUNCTIONS
+// =====================
+
+// Buscar consultas por paciente ID (função principal)
+export async function getConsultasByPacienteId(idPaciente: number): Promise<tipoConsulta[]> {
+  // Buscar todas as consultas e filtrar pelo paciente
+  const response = await fetch(`${API_BASE_URL}/consultas`);
+
+  if (!response.ok) {
+    throw new Error(`Erro ao buscar consultas (status ${response.status})`);
+  }
+
+  const todasConsultas = await response.json();
+  
+  // Filtrar consultas do paciente específico
+  return todasConsultas.filter((consulta: tipoConsulta) => consulta.idPaciente === idPaciente);
+}
+
+// Criar nova consulta
+export async function createConsulta(consulta: Omit<tipoConsulta, 'idConsulta'>): Promise<string> {
+  const response = await fetch(`${API_BASE_URL}/consultas`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(consulta),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Erro ao criar consulta (status ${response.status}): ${errorText}`);
+  }
+
+  return await response.text(); // Retorna mensagem de sucesso
+}
+
+// Atualizar consulta
+export async function updateConsulta(id: number, consulta: Partial<tipoConsulta>): Promise<string> {
+  const response = await fetch(`${API_BASE_URL}/consultas/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(consulta),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Erro ao atualizar consulta (status ${response.status}): ${errorText}`);
+  }
+
+  return await response.text(); // Retorna mensagem de sucesso
+}
+
+// Deletar consulta
+export async function deleteConsulta(id: number): Promise<boolean> {
+  const response = await fetch(`${API_BASE_URL}/consultas/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Erro ao deletar consulta (status ${response.status}): ${errorText}`);
+  }
+
+  return true; // Retorna true se deletou com sucesso (204 No Content)
 }
