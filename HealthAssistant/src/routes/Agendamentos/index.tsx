@@ -3,55 +3,55 @@ import Links from "../../components/Links/Links";
 import { useState, useEffect } from "react";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
-import type { tipoAgendamento } from "../../types/tipoAgendamento";
-import { listaAgendamentos } from "../../data/listaAgendamento";
+import type { tipoConsulta } from "../../types/tipoConsulta";
+import { getConsultasByPacienteId } from "../../data/api";
 
 export default function Agendamentos() {
   const navigate = useNavigate();
-  const [proximosAgendamentos, setProximosAgendamentos] = useState<tipoAgendamento[]>([]);
-  const [historico, setHistorico] = useState<tipoAgendamento[]>([]);
+  const [proximasConsultas, setProximasConsultas] = useState<tipoConsulta[]>([]);
+  const [historicoConsultas, setHistoricoConsultas] = useState<tipoConsulta[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
   const [isHovered, setIsHovered] = useState(false);
 
-  const getAgendamentosPorPaciente = (pacienteId: number) => {
-    return listaAgendamentos.filter(
-      agendamento => agendamento.pacienteId === pacienteId
-    );
-  };
+  // Buscar consultas do paciente
+  const carregarConsultas = async () => {
+    setLoading(true);
+    setError("");
+    
+    try {
+      const pacienteId = localStorage.getItem('pacienteLogadoId');
+      if (!pacienteId) {
+        setError("ID do paciente não encontrado. Faça login novamente.");
+        return;
+      }
 
-  const getProximosAgendamentos = (pacienteId: number) => {
-    const hoje = new Date();
-    return getAgendamentosPorPaciente(pacienteId)
-      .filter(agendamento => {
-        const dataAgendamento = new Date(agendamento.data.split('/').reverse().join('-'));
-        return dataAgendamento >= hoje && agendamento.status === 'Agendado';
-      })
-      .sort((a, b) => {
-        const dataA = new Date(a.data.split('/').reverse().join('-'));
-        const dataB = new Date(b.data.split('/').reverse().join('-'));
-        return dataA.getTime() - dataB.getTime();
-      });
-  };
-
-  const getHistoricoAgendamentos = (pacienteId: number) => {
-    const hoje = new Date();
-    return getAgendamentosPorPaciente(pacienteId)
-      .filter(agendamento => {
-        const dataAgendamento = new Date(agendamento.data.split('/').reverse().join('-'));
-        return dataAgendamento < hoje || agendamento.status === 'Concluído';
-      });
+      const consultas = await getConsultasByPacienteId(parseInt(pacienteId));
+      
+      // Separar consultas futuras e passadas
+      const agora = new Date();
+      
+      const futuras = consultas.filter((consulta: tipoConsulta) => {
+        const dataConsulta = new Date(consulta.dataHora);
+        return dataConsulta >= agora && (consulta.status === 'Agendada' || consulta.status === 'Confirmada');
+      }).sort((a: tipoConsulta, b: tipoConsulta) => new Date(a.dataHora).getTime() - new Date(b.dataHora).getTime());
+      
+      const passadas = consultas.filter((consulta: tipoConsulta) => {
+        const dataConsulta = new Date(consulta.dataHora);
+        return dataConsulta < agora || consulta.status === 'Realizada' || consulta.status === 'Cancelada';
+      }).sort((a: tipoConsulta, b: tipoConsulta) => new Date(b.dataHora).getTime() - new Date(a.dataHora).getTime());
+      
+      setProximasConsultas(futuras);
+      setHistoricoConsultas(passadas.slice(0, 10)); // Limitar histórico a 10 itens
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao carregar consultas");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    // Pegar ID do paciente logado
-    const pacienteId = localStorage.getItem('pacienteLogadoId');
-    
-    if (pacienteId) {
-      const proximos = getProximosAgendamentos(parseInt(pacienteId));
-      const hist = getHistoricoAgendamentos(parseInt(pacienteId));
-      
-      setProximosAgendamentos(proximos);
-      setHistorico(hist);
-    }
+    carregarConsultas();
   }, []);
 
   return (
@@ -74,42 +74,56 @@ export default function Agendamentos() {
       </div>
       
       <div className="agendamentos-content">
-        {/* Próximos Agendamentos */}
-        <div className="agendamentos-card">
-          <div className="agendamentos-card-title">Próximas consultas</div>
-          {proximosAgendamentos.length > 0 ? (
-            proximosAgendamentos.map(agendamento => (
-              <div key={agendamento.id} className="agendamentos-card-text">
-                Data: {agendamento.data}<br />
-                Horário: {agendamento.horario}<br />
-                {agendamento.tipo}<br />
-                Unidade: {agendamento.unidade}<br />
-                {agendamento.especialidade && `Especialidade: ${agendamento.especialidade}`}<br />
-                {agendamento.medico && `Médico: ${agendamento.medico}`}
-              </div>
-            ))
-          ) : (
-            <div className="agendamentos-card-text">
-              Você não possui consultas agendadas
-            </div>
-          )}
-        </div>
+        {loading && (
+          <div className="perfil-loading">
+            Carregando consultas...
+          </div>
+        )}
 
-        {/* Histórico */}
-        <div className="agendamentos-recent">
-          <div className="agendamentos-recent-title">Últimos acessos</div>
-          {historico.length > 0 ? (
-            <div className="agendamentos-card-text">
-              {historico.slice(0, 3).map(agendamento => (
-                <div key={agendamento.id} className="agendamentos-card-text">
-                  {agendamento.data} - {agendamento.especialidade}
+        {error && (
+          <div className="perfil-error-message">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && (
+          <>
+            {/* Próximas Consultas */}
+            <div className="agendamentos-card">
+              <div className="agendamentos-card-title">Próximas consultas</div>
+              {proximasConsultas.length > 0 ? (
+                proximasConsultas.map(consulta => (
+                  <div key={consulta.idConsulta} className="agendamentos-card-text">
+                    Data: {new Date(consulta.dataHora).toLocaleDateString('pt-BR')}<br />
+                    Horário: {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}<br />
+                    Tipo: {consulta.tipo}<br />
+                    Status: {consulta.status}
+                  </div>
+                ))
+              ) : (
+                <div className="agendamentos-card-text">
+                  Você não possui consultas agendadas
                 </div>
-              ))}
+              )}
             </div>
-          ) : (
-            "Você não possui acessos recentes"
-          )}
-        </div>
+
+            {/* Histórico */}
+            <div className="agendamentos-recent">
+              <div className="agendamentos-recent-title">Histórico de consultas</div>
+              {historicoConsultas.length > 0 ? (
+                <div className="agendamentos-card-text">
+                  {historicoConsultas.slice(0, 3).map(consulta => (
+                    <div key={consulta.idConsulta} className="agendamentos-card-text">
+                      {new Date(consulta.dataHora).toLocaleDateString('pt-BR')} - {consulta.tipo} ({consulta.status})
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                "Você não possui histórico de consultas"
+              )}
+            </div>
+          </>
+        )}
       </div>
       <Links />
     </div>
