@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoConsulta } from "../../types/tipoConsulta";
-import { getConsultasByPacienteId } from "../../data/api";
-import { IoMdRefresh } from "react-icons/io";
+import { getConsultasByPacienteId, updateConsulta, deleteConsulta } from "../../data/api";
+import { IoMdRefresh as Refresh } from "react-icons/io";
+import { MdEdit as Edit, MdFreeCancellation  as Cancel } from "react-icons/md";
 
 export default function Agendamentos() {
   const navigate = useNavigate();
@@ -14,6 +15,18 @@ export default function Agendamentos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Estados para edição
+  const [editingConsulta, setEditingConsulta] = useState<tipoConsulta | null>(null);
+  const [editForm, setEditForm] = useState({
+    tipo: '',
+    dataHora: '',
+    status: ''
+  });
+  
+  // Estados para confirmação de cancelamento
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [consultaToDelete, setConsultaToDelete] = useState<number | null>(null);
 
   // Buscar consultas do paciente
   const carregarConsultas = async () => {
@@ -60,6 +73,78 @@ export default function Agendamentos() {
     carregarConsultas();
   };
 
+  // Função para iniciar edição
+  const handleEditClick = (consulta: tipoConsulta) => {
+    setEditingConsulta(consulta);
+    setEditForm({
+      tipo: consulta.tipo,
+      dataHora: consulta.dataHora,
+      status: consulta.status
+    });
+  };
+
+  // Função para cancelar edição
+  const handleCancelEdit = () => {
+    setEditingConsulta(null);
+    setEditForm({
+      tipo: '',
+      dataHora: '',
+      status: ''
+    });
+  };
+
+  // Função para salvar edição
+  const handleSaveEdit = async () => {
+    if (!editingConsulta) return;
+
+    try {
+      setLoading(true);
+      await updateConsulta(editingConsulta.idConsulta, {
+        tipo: editForm.tipo,
+        dataHora: editForm.dataHora,
+        status: editForm.status
+      });
+      
+      handleCancelEdit();
+      await carregarConsultas(); // Recarregar lista
+      setError(""); // Limpar erros
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao atualizar consulta");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Função para iniciar processo de cancelamento
+  const handleDeleteClick = (idConsulta: number) => {
+    setConsultaToDelete(idConsulta);
+    setShowDeleteConfirm(true);
+  };
+
+  // Função para confirmar cancelamento
+  const handleConfirmDelete = async () => {
+    if (!consultaToDelete) return;
+
+    try {
+      setLoading(true);
+      await deleteConsulta(consultaToDelete);
+      await carregarConsultas(); // Recarregar lista
+      setError(""); // Limpar erros
+      setShowDeleteConfirm(false);
+      setConsultaToDelete(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao cancelar consulta");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Função para cancelar o cancelamento
+  const handleCancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setConsultaToDelete(null);
+  };
+
   return (
     <div className="agendamentos">
       <div className="agendar-banner">
@@ -86,7 +171,7 @@ export default function Agendamentos() {
           className="agendamentos-refresh-btn-friendly"
           disabled={loading}
         >
-          <IoMdRefresh className={loading ? 'refresh-spinning' : ''} />
+          <Refresh className={loading ? 'refresh-spinning' : ''} />
           <span>{loading ? 'Atualizando...' : 'Atualizar consultas'}</span>
         </button>
       </div>
@@ -111,11 +196,29 @@ export default function Agendamentos() {
               <div className="agendamentos-card-title">Próximas consultas</div>
               {proximasConsultas.length > 0 ? (
                 proximasConsultas.map(consulta => (
-                  <div key={consulta.idConsulta} className="agendamentos-card-text">
-                    Data: {new Date(consulta.dataHora).toLocaleDateString('pt-BR')}<br />
-                    Horário: {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}<br />
-                    {consulta.tipo === 'online' ? 'Consulta Online (Telemedicina)' : 'Consulta Presencial'}<br />
-                    Status: Agendada
+                  <div key={consulta.idConsulta} className="consulta-item">
+                    <div className="agendamentos-card-text">
+                      Data: {new Date(consulta.dataHora).toLocaleDateString('pt-BR')}<br />
+                      Horário: {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}<br />
+                      {consulta.tipo === 'online' ? 'Consulta Online (Telemedicina)' : 'Consulta Presencial'}<br />
+                      Status: Agendada
+                    </div>
+                    <div className="consulta-actions">
+                      <button 
+                        onClick={() => handleEditClick(consulta)}
+                        className="btn-edit"
+                        title="Editar consulta"
+                      >
+                        <Edit />
+                      </button>
+                      <button 
+                        onClick={() => handleDeleteClick(consulta.idConsulta)}
+                        className="btn-delete"
+                        title="Cancelar consulta"
+                      >
+                        <Cancel />
+                      </button>
+                    </div>
                   </div>
                 ))
               ) : (
@@ -147,6 +250,112 @@ export default function Agendamentos() {
           </>
         )}
       </div>
+
+      {/* Modal de Edição */}
+      {editingConsulta && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3>Editar Consulta</h3>
+              <button onClick={handleCancelEdit} className="modal-close">×</button>
+            </div>
+            
+            <div className="modal-body">
+              <div className="form-group">
+                <label htmlFor="tipo">Tipo de Consulta:</label>
+                <select 
+                  id="tipo"
+                  value={editForm.tipo}
+                  onChange={(e) => setEditForm({...editForm, tipo: e.target.value})}
+                  className="form-input"
+                >
+                  <option value="online">Online (Telemedicina)</option>
+                  <option value="presencial">Presencial</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="dataHora">Data e Hora:</label>
+                <input 
+                  type="datetime-local"
+                  id="dataHora"
+                  value={editForm.dataHora.slice(0, 16)} // Formato para datetime-local
+                  onChange={(e) => setEditForm({...editForm, dataHora: e.target.value + ':00'})}
+                  className="form-input"
+                  min={new Date().toISOString().slice(0, 16)} // Não permitir datas passadas
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="status">Status:</label>
+                <select 
+                  id="status"
+                  value={editForm.status}
+                  onChange={(e) => setEditForm({...editForm, status: e.target.value})}
+                  className="form-input"
+                >
+                  <option value="agendada">Agendada</option>
+                  <option value="realizada">Realizada</option>
+                  <option value="cancelada">Cancelada</option>
+                  <option value="ausente">Ausente</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button 
+                onClick={handleSaveEdit}
+                className="btn-save"
+                disabled={loading}
+              >
+                {loading ? 'Salvando...' : 'Salvar'}
+              </button>
+              <button 
+                onClick={handleCancelEdit}
+                className="btn-cancel"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Confirmação de Cancelamento */}
+      {showDeleteConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3>Confirmar Cancelamento</h3>
+              <button onClick={handleCancelDelete} className="modal-close">×</button>
+            </div>
+            
+            <div className="modal-body">
+              <div className="confirm-message">
+                <p>Tem certeza que deseja cancelar esta consulta?</p>
+                <p className="confirm-warning">Esta ação não pode ser desfeita.</p>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button 
+                onClick={handleConfirmDelete}
+                className="btn-delete-confirm"
+                disabled={loading}
+              >
+                {loading ? 'Cancelando...' : 'Sim, cancelar consulta'}
+              </button>
+              <button 
+                onClick={handleCancelDelete}
+                className="btn-cancel"
+              >
+                Não, manter consulta
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Links />
     </div>
   );
