@@ -30,29 +30,65 @@ export default function Faq() {
 
         <div className="faq-card banner-limit">
           <div className="faq-card-title">
-            Como eu recebo o lembrete da consulta?
+            Como remarcar consulta?
           </div>
           <div className="faq-card-text">
-            Você recebe via WhatsApp<br />
-            um dia antes e no dia da consulta
+            Acesse sua área e selecione a nova data.
           </div>
         </div>
 
         <div className="faq-card banner-limit">
           <div className="faq-card-title">
-            Preciso lembrar da senha?
+            Quais horários de atendimento?
           </div>
           <div className="faq-card-text">
-            Não. você recebe um código de verificação no seu celular para acessar caso você entre via data de nascimento e cpf
+            Das 8h às 18h de segunda a sexta.
           </div>
         </div>
-      
+
         <div className="faq-card banner-limit">
           <div className="faq-card-title">
-            O sistema funciona em celular antigo?
+            Posso mudar meu e-mail?
           </div>
           <div className="faq-card-text">
-            Sim, o sistema é otimizado para funcionar em celulares mais antigos, mas recomendamos o uso de dispositivos mais recentes para uma melhor experiência.
+            Sim, acesse o perfil e atualize.
+          </div>
+        </div>
+
+
+        <div className="faq-card banner-limit">
+          <div className="faq-card-title">
+            Há atendimento emergencial?
+          </div>
+          <div className="faq-card-text">
+            Sim, via chat 24h.
+          </div>
+        </div>
+
+        <div className="faq-card banner-limit">
+          <div className="faq-card-title">
+            Como atualizar telefone?
+          </div>
+          <div className="faq-card-text">
+            Vá em perfil e altere o número.
+          </div>
+        </div>
+
+        <div className="faq-card banner-limit">
+          <div className="faq-card-title">
+            O suporte é gratuito?
+          </div>
+          <div className="faq-card-text">
+            Sim, para todos os usuários.
+          </div>
+        </div>
+
+        <div className="faq-card banner-limit">
+          <div className="faq-card-title">
+            Como excluir conta?
+          </div>
+          <div className="faq-card-text">
+            Solicite via suporte
           </div>
         </div>
 
