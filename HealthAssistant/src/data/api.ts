@@ -1,6 +1,7 @@
 // src/data/api.ts
 import type { tipoCuidador } from "../types/tipoCuidador";
 import type { tipoConsulta } from "../types/tipoConsulta";
+import type { tipoResultadoExame } from "../types/tipoResultadoExame";
 
 export const API_BASE_URL = "http://localhost:8080"; 
 
@@ -173,4 +174,19 @@ export async function deleteConsulta(id: number): Promise<boolean> {
   }
 
   return true; // Retorna true se deletou com sucesso (204 No Content)
+}
+
+// ========================================
+// RESULTADOS DE EXAMES
+// ========================================
+
+// Buscar resultados de exames por ID do paciente
+export async function getResultadosByPacienteId(idPaciente: number): Promise<tipoResultadoExame[]> {
+  const response = await fetch(`${API_BASE_URL}/resultadoExame/paciente/${idPaciente}`);
+
+  if (!response.ok) {
+    throw new Error(`Erro ao buscar resultados de exames (status ${response.status})`);
+  }
+
+  return await response.json();
 }
