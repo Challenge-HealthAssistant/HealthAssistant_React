@@ -4,13 +4,86 @@ import { useState } from "react";
 import Links from "../../components/Links/Links";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
+import { createConsulta } from "../../data/api";
+import type { tipoConsulta } from "../../types/tipoConsulta";
 
 export default function Agendar() {
-
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Estados do formulário
+  const [tipo, setTipo] = useState("");
+  const [data, setData] = useState("");
+  const [horario, setHorario] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
+  // Opções de tipos de consulta (conforme banco de dados)
+  const tiposConsulta = [
+    { value: "online", label: "Consulta Online (Telemedicina)" },
+    { value: "presencial", label: "Consulta Presencial (Na unidade)" }
+  ];
 
+  // Função para agendar consulta
+  const handleAgendar = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      // Validações
+      if (!tipo || !data || !horario) {
+        setError("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      // Verificar se a data não é no passado
+      const dataConsulta = new Date(`${data}T${horario}`);
+      const agora = new Date();
+      
+      if (dataConsulta <= agora) {
+        setError("A data e horário devem ser futuros.");
+        return;
+      }
+
+      // Buscar ID do paciente
+      const pacienteId = localStorage.getItem('pacienteLogadoId');
+      if (!pacienteId) {
+        setError("ID do paciente não encontrado. Faça login novamente.");
+        return;
+      }
+
+      // Criar dados da consulta
+      const novaConsulta: Omit<tipoConsulta, 'idConsulta'> = {
+        idPaciente: parseInt(pacienteId),
+        tipo: tipo, // 'online' ou 'presencial'
+        status: "agendada", // Conforme constraint do banco: 'agendada','realizada','ausente','cancelada'
+        dataHora: `${data}T${horario}:00` // Formato: YYYY-MM-DDTHH:MM:SS
+      };
+
+      // Enviar para API
+      await createConsulta(novaConsulta);
+      
+      setSuccess(" Consulta agendada com sucesso!");
+      
+      // Limpar formulário
+      setTipo("");
+      setData("");
+      setHorario("");
+
+      // Redirecionar após 2 segundos
+      setTimeout(() => {
+        navigate("/agendamentos");
+      }, 2000);
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao agendar consulta");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="agendar-bg">
@@ -28,61 +101,89 @@ export default function Agendar() {
             className="back-btn-icon" 
           />
         </button>
-        <h2 className="agendar-title">Agendar</h2>
+        <h2 className="agendar-title">Agendar Consulta</h2>
       </div>
+      
       <div className="agendar-content">
-        <div className="agendar-subtitle">
-          Consulte a cobertura convênio ou agende particular
-        </div>
-        <div className="agendar-cards-container">
-          {/* Card 1 */}
-          <div className="agendar-card">
-            <div className="agendar-card-title">Psicologia</div>
-            <div className="agendar-card-subtitle">
-              Outros nomes: Psicoterapia, Psicanálise, Psciociência
+        <div className="perfil-card">
+          {error && (
+            <div className="perfil-error-message">
+              {error}
             </div>
-            <div className="agendar-card-location">
-              <span className="agendar-card-location-text">Na unidade</span>
+          )}
+
+          {success && (
+            <div className="perfil-success-message">
+              {success}
             </div>
-            <div className="agendar-buttons">
-              <button
-                className="agendar-btn"
-               
+          )}
+
+          <form onSubmit={handleAgendar}>
+            <div className="perfil-field">
+              <label className="perfil-label">Tipo de Consulta *</label>
+              <select
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
+                className="perfil-input"
+                disabled={loading}
+                required
               >
-                Ver detalhes
-              </button>
-              <button
-                className="agendar-btn"
-                
+                <option value="">Selecione o tipo de consulta</option>
+                {tiposConsulta.map((tipoOpcao) => (
+                  <option key={tipoOpcao.value} value={tipoOpcao.value}>
+                    {tipoOpcao.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="perfil-field">
+              <label className="perfil-label">Data da Consulta *</label>
+              <input
+                type="date"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+                className="perfil-input"
+                disabled={loading}
+                min={new Date().toISOString().split('T')[0]} // Data mínima é hoje
+                required
+              />
+            </div>
+
+            <div className="perfil-field">
+              <label className="perfil-label">Horário *</label>
+              <input
+                type="time"
+                value={horario}
+                onChange={(e) => setHorario(e.target.value)}
+                className="perfil-input"
+                disabled={loading}
+                required
+              />
+              <small className="perfil-field-hint">
+                Selecione o horário desejado para sua consulta
+              </small>
+            </div>
+
+            <div className="perfil-buttons">
+              <button 
+                type="submit"
+                className={`perfil-btn-editar ${loading ? 'perfil-btn-loading' : ''}`}
+                disabled={loading}
               >
-                Agendar
+                {loading ? "Agendando..." : " Agendar Consulta"}
               </button>
-            </div>
-          </div>
-          {/* Card 2 */}
-          <div className="agendar-card">
-            <div className="agendar-card-title">Hemograma, sangue total</div>
-            <div className="agendar-card-subtitle">
-              Outros nomes: Hemograma, Hemograma completo, Hemograma Sangue
-            </div>
-            <div className="agendar-card-location">
-              <span className="agendar-card-location-text">Na unidade</span>
-            </div>
-            <div className="agendar-buttons">
-              <button
-                className="agendar-btn"
-                
+              
+              <button 
+                type="button"
+                className="perfil-btn-sair"
+                onClick={() => navigate("/agendamentos")}
+                disabled={loading}
               >
-                Ver detalhes
-              </button>
-              <button
-                className="agendar-btn"
-                
-              >
-                Agendar
+                Ver Agendamentos
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <Links />
