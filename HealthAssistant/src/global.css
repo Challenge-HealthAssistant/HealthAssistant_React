@@ -357,6 +357,47 @@
       background: -webkit-linear-gradient(to right, #2179b0, #6dd5ed); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to right, #2179b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
      }
+     
+     /* Container do botão refresh */
+     .agendamentos-refresh-container {
+       @apply flex justify-center px-4 py-3 bg-[#1976a5];
+       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+     }
+     
+     /* Botão refresh amigável */
+     .agendamentos-refresh-btn-friendly {
+       @apply bg-white text-[#1976a5] px-4 py-2 rounded-lg;
+       @apply flex items-center gap-2 font-medium;
+       @apply hover:bg-gray-50 hover:shadow-md transition-all duration-200;
+       @apply disabled:opacity-70 disabled:cursor-not-allowed;
+       @apply focus:outline-none focus:ring-2 focus:ring-blue-300;
+       @apply border border-[#1976a5] shadow-sm;
+       min-width: 160px;
+       justify-content: center;
+     }
+     
+     .agendamentos-refresh-btn-friendly:disabled:hover {
+       @apply bg-white shadow-none;
+     }
+     
+     /* Animação de rotação para o ícone quando carregando */
+     @keyframes spin {
+       from { transform: rotate(0deg); }
+       to { transform: rotate(360deg); }
+     }
+     
+     .refresh-spinning {
+       animation: spin 1s linear infinite;
+     }
+     
+     /* Botão refresh antigo - manter para compatibilidade se usado em outro lugar */
+     .agendamentos-refresh-btn {
+       @apply absolute right-4 top-1/2 transform -translate-y-1/2;
+       @apply bg-white text-[#1976a5] border border-[#1976a5] rounded-full;
+       @apply w-10 h-10 flex items-center justify-center;
+       @apply hover:bg-[#1976a5] hover:text-white transition-colors;
+       @apply disabled:opacity-50 disabled:cursor-not-allowed;
+     }
 
      /* ----------------- */
      /* Resultados        */

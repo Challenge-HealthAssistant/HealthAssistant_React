@@ -5,6 +5,7 @@ import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoConsulta } from "../../types/tipoConsulta";
 import { getConsultasByPacienteId } from "../../data/api";
+import { IoMdRefresh } from "react-icons/io";
 
 export default function Agendamentos() {
   const navigate = useNavigate();
@@ -33,12 +34,12 @@ export default function Agendamentos() {
       
       const futuras = consultas.filter((consulta: tipoConsulta) => {
         const dataConsulta = new Date(consulta.dataHora);
-        return dataConsulta >= agora && (consulta.status === 'Agendada' || consulta.status === 'Confirmada');
+        return dataConsulta >= agora && (consulta.status === 'agendada'); // Conforme banco de dados
       }).sort((a: tipoConsulta, b: tipoConsulta) => new Date(a.dataHora).getTime() - new Date(b.dataHora).getTime());
       
       const passadas = consultas.filter((consulta: tipoConsulta) => {
         const dataConsulta = new Date(consulta.dataHora);
-        return dataConsulta < agora || consulta.status === 'Realizada' || consulta.status === 'Cancelada';
+        return dataConsulta < agora || consulta.status === 'realizada' || consulta.status === 'cancelada' || consulta.status === 'ausente';
       }).sort((a: tipoConsulta, b: tipoConsulta) => new Date(b.dataHora).getTime() - new Date(a.dataHora).getTime());
       
       setProximasConsultas(futuras);
@@ -53,6 +54,11 @@ export default function Agendamentos() {
   useEffect(() => {
     carregarConsultas();
   }, []);
+
+  // Função para forçar atualização (pode ser chamada quando voltar de outras telas)
+  const handleRefresh = () => {
+    carregarConsultas();
+  };
 
   return (
     <div className="agendamentos">
@@ -71,6 +77,18 @@ export default function Agendamentos() {
           />
         </button>
         <h2 className="agendar-title">Agendamentos</h2>
+      </div>
+      
+      {/* Botão de atualizar mais amigável */}
+      <div className="agendamentos-refresh-container">
+        <button 
+          onClick={handleRefresh}
+          className="agendamentos-refresh-btn-friendly"
+          disabled={loading}
+        >
+          <IoMdRefresh className={loading ? 'refresh-spinning' : ''} />
+          <span>{loading ? 'Atualizando...' : 'Atualizar consultas'}</span>
+        </button>
       </div>
       
       <div className="agendamentos-content">
@@ -96,8 +114,8 @@ export default function Agendamentos() {
                   <div key={consulta.idConsulta} className="agendamentos-card-text">
                     Data: {new Date(consulta.dataHora).toLocaleDateString('pt-BR')}<br />
                     Horário: {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}<br />
-                    Tipo: {consulta.tipo}<br />
-                    Status: {consulta.status}
+                    {consulta.tipo === 'online' ? 'Consulta Online (Telemedicina)' : 'Consulta Presencial'}<br />
+                    Status: Agendada
                   </div>
                 ))
               ) : (
@@ -114,7 +132,11 @@ export default function Agendamentos() {
                 <div className="agendamentos-card-text">
                   {historicoConsultas.slice(0, 3).map(consulta => (
                     <div key={consulta.idConsulta} className="agendamentos-card-text">
-                      {new Date(consulta.dataHora).toLocaleDateString('pt-BR')} - {consulta.tipo} ({consulta.status})
+                      {new Date(consulta.dataHora).toLocaleDateString('pt-BR')} - 
+                      {consulta.tipo === 'online' ? ' Online' : ' Presencial'} 
+                      ({consulta.status === 'realizada' ? 'Realizada' : 
+                        consulta.status === 'cancelada' ? 'Cancelada' : 
+                        consulta.status === 'ausente' ? 'Ausente' : consulta.status})
                     </div>
                   ))}
                 </div>
