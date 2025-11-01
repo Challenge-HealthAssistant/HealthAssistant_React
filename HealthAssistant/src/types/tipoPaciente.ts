@@ -4,7 +4,8 @@ export interface tipoPaciente {
   cpf: string;
   dataNascimento: string;
   telefone: string;
-  cuidador?: string;
+  idCuidador?: number; // Referência ao ID do cuidador
+  cuidador?: string; // Nome do cuidador (fallback)
+  telefoneCuidador?: string; // Telefone do cuidador (fallback)
   email: string;
-  senha?: string;
 }

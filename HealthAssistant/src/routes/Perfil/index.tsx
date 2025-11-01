@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import voltar from "../../img/voltar.png";
 import voltarVerde from "../../img/botao-voltar-verde.png";
 import type { tipoPaciente } from "../../types/tipoPaciente";
-import { getPacienteById } from "../../data/api"; // 👈 novo import
+import { getPacienteById, getCuidadorByPacienteId } from "../../data/api"; 
 
 export default function Perfil() {
   const navigate = useNavigate();
@@ -13,6 +13,19 @@ export default function Perfil() {
   const [perfil, setPerfil] = useState<tipoPaciente | null>(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [cuidadorDetalhes, setCuidadorDetalhes] = useState<{ nome?: string; telefone?: string } | null>(null);
+
+  // Converter data de ISO (YYYY-MM-DD) para formato brasileiro (DD/MM/YYYY)
+  const converterDataISOParaBR = (dataISO: string) => {
+    if (!dataISO) return "";
+    
+    // Se já está no formato brasileiro, retorna como está
+    if (dataISO.includes('/')) return dataISO;
+    
+    // Converter de YYYY-MM-DD para DD/MM/YYYY
+    const [ano, mes, dia] = dataISO.split('-');
+    return `${dia}/${mes}/${ano}`;
+  };
 
   useEffect(() => {
     let pacienteId: number;
@@ -32,9 +45,41 @@ export default function Perfil() {
     getPacienteById(pacienteId)
       .then((data) => {
         setPerfil(data);
+
+        // Buscar cuidador associado ao paciente pelo ID do paciente
+        (async () => {
+          try {
+            const cuidadorDoPaciente = await getCuidadorByPacienteId(data.idPaciente);
+            
+            if (cuidadorDoPaciente) {
+              const detalhes = {
+                nome: cuidadorDoPaciente.nome || "",
+                telefone: cuidadorDoPaciente.telefone || "",
+              };
+              setCuidadorDetalhes(detalhes);
+            } else if (data.cuidador) {
+              // Fallback: usar dados do paciente (se existirem)
+              setCuidadorDetalhes({ 
+                nome: data.cuidador, 
+                telefone: data.telefoneCuidador || "" 
+              });
+            } else {
+              setCuidadorDetalhes(null);
+            }
+          } catch (err) {
+            // Em caso de erro, usar dados do paciente como fallback
+            if (data.cuidador) {
+              setCuidadorDetalhes({ 
+                nome: data.cuidador, 
+                telefone: data.telefoneCuidador || "" 
+              });
+            } else {
+              setCuidadorDetalhes(null);
+            }
+          }
+        })();
       })
-      .catch((error) => {
-        console.error("Erro ao carregar paciente:", error);
+      .catch(() => {
         localStorage.removeItem("pacienteLogadoId");
         localStorage.removeItem("pacienteLogadoNome");
         navigate("/login");
@@ -49,7 +94,11 @@ export default function Perfil() {
   }
 
   function handleEditar() {
-    alert("Funcionalidade de edição será implementada");
+    if (perfil) {
+      navigate(`/editar-perfil/${perfil.idPaciente}`);
+    } else {
+      navigate("/editar-perfil");
+    }
   }
 
   // Resto do JSX permanece igual
@@ -91,7 +140,7 @@ export default function Perfil() {
 
             <div className="perfil-field">
               <label className="perfil-label">Data de Nascimento</label>
-              <div className="perfil-value">{perfil.dataNascimento}</div>
+              <div className="perfil-value">{converterDataISOParaBR(perfil.dataNascimento)}</div>
             </div>
 
             <div className="perfil-field">
@@ -105,18 +154,26 @@ export default function Perfil() {
             </div>
 
             <div className="perfil-field">
-                <label className="perfil-label">Senha</label>
-                <div className="perfil-value">{perfil.senha}</div>
-            </div>
-
-            <div className="perfil-field">
               <label className="perfil-label">E-mail</label>
               <div className="perfil-value">{perfil.email}</div>
             </div>
 
             <div className="perfil-field">
-              <label className="perfil-label">cuidador</label>
-              <div className="perfil-value">{perfil.cuidador}</div>
+              <label className="perfil-label">Cuidador</label>
+              <div className="perfil-value">
+                {cuidadorDetalhes && cuidadorDetalhes.nome
+                  ? cuidadorDetalhes.nome
+                  : (perfil.cuidador || <span style={{ color: '#999', fontStyle: 'italic' }}>Não informado</span>)}
+              </div>
+            </div>
+
+            <div className="perfil-field">
+              <label className="perfil-label">Telefone do Cuidador</label>
+              <div className="perfil-value">
+                {cuidadorDetalhes && cuidadorDetalhes.telefone
+                  ? cuidadorDetalhes.telefone
+                  : (perfil.telefoneCuidador || <span style={{ color: '#999', fontStyle: 'italic' }}>Não informado</span>)}
+              </div>
             </div>
 
             

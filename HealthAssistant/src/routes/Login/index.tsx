@@ -70,8 +70,7 @@ export default function Login() {
     } else {
       setErro("CPF ou data de nascimento incorretos. Tente novamente.");
     }
-  } catch (error) {
-    console.error("Erro ao conectar à API:", error);
+  } catch {
     setErro("Erro de conexão com o servidor.");
   } finally {
     setCarregando(false);
