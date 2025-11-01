@@ -120,8 +120,6 @@ export default function Cadastro() {
         email: email.trim().toLowerCase(),
       };
 
-      console.log("Dados sendo enviados:", novoPaciente);
-
       const response = await fetch("http://localhost:8080/pacientes", {
         method: "POST",
         headers: {
@@ -131,11 +129,8 @@ export default function Cadastro() {
         body: JSON.stringify(novoPaciente),
       });
 
-      console.log("Status da resposta:", response.status);
-
       if (response.ok) {
         const data = await response.json();
-        console.log("Resposta da API:", data);
 
         setErro("");
         setSucesso("Cadastro realizado com sucesso!");
@@ -155,7 +150,6 @@ export default function Cadastro() {
         
       } else {
         const errorText = await response.text();
-        console.log("Erro da API:", errorText);
         
         //  Tratamento mais específico baseado no seu backend
         if (response.status === 400) {
@@ -170,8 +164,7 @@ export default function Cadastro() {
           setErro(`Erro ${response.status}: ${errorText}`);
         }
       }
-    } catch (error) {
-      console.error("Erro:", error);
+    } catch {
       setErro("Falha ao conectar com o servidor.");
     } finally {
       setCarregando(false);
