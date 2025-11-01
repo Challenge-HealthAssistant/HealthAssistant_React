@@ -361,27 +361,13 @@ export default function EditarPerfil() {
       <div className="perfil-content">
         <div className="perfil-card">
           {error && (
-            <div style={{ 
-              color: '#dc2626', 
-              backgroundColor: '#fef2f2', 
-              padding: '10px', 
-              borderRadius: '4px', 
-              marginBottom: '15px',
-              border: '1px solid #fecaca'
-            }}>
+            <div className="perfil-error-message">
                {error}
             </div>
           )}
 
           {success && (
-            <div style={{ 
-              color: '#16a34a', 
-              backgroundColor: '#f0fdf4', 
-              padding: '10px', 
-              borderRadius: '4px', 
-              marginBottom: '15px',
-              border: '1px solid #bbf7d0'
-            }}>
+            <div className="perfil-success-message">
               {success}
             </div>
           )}
@@ -413,7 +399,7 @@ export default function EditarPerfil() {
 
             <div className="perfil-field">
               <label className="perfil-label">CPF</label>
-              <div className="perfil-value" style={{ color: '#666', fontStyle: 'italic' }}>
+              <div className="perfil-value perfil-value-readonly">
                 {perfil.cpf} (não pode ser alterado)
               </div>
             </div>
@@ -454,10 +440,10 @@ export default function EditarPerfil() {
                 placeholder={temCuidador ? "Alterar nome do cuidador" : "Nome do cuidador"}
                 disabled={saving}
               />
-              <small style={{ color: '#666', fontSize: '12px', marginTop: '4px', display: 'block' }}>
+              <small className="perfil-field-hint">
                 {temCuidador 
-                  ? "✏️ Você já tem um cuidador cadastrado. Pode alterar os dados aqui."
-                  : "➕ Digite o nome para cadastrar um novo cuidador (familiar, enfermeiro, etc.)"
+                  ? " Você já tem um cuidador cadastrado. Pode alterar os dados aqui."
+                  : " Digite o nome para cadastrar um novo cuidador (familiar, enfermeiro, etc.)"
                 }
               </small>
             </div>
@@ -474,10 +460,10 @@ export default function EditarPerfil() {
                 placeholder={temCuidador ? "Alterar telefone" : "(11) 99999-9999"}
                 disabled={saving}
               />
-              <small style={{ color: '#666', fontSize: '12px', marginTop: '4px', display: 'block' }}>
+              <small className="perfil-field-hint">
                 {temCuidador 
-                  ? "📞 Telefone atual do cuidador - pode ser alterado"
-                  : "📞 Telefone de contato para emergências - obrigatório se informar o nome"
+                  ? " Telefone atual do cuidador - pode ser alterado"
+                  : " Telefone de contato para emergências - obrigatório se informar o nome"
                 }
               </small>
             </div>
@@ -485,14 +471,10 @@ export default function EditarPerfil() {
             <div className="perfil-buttons">
               <button 
                 type="submit"
-                className="perfil-btn-editar"
+                className={`perfil-btn-editar ${saving ? 'perfil-btn-loading' : ''}`}
                 disabled={saving}
-                style={{ 
-                  opacity: saving ? 0.6 : 1,
-                  cursor: saving ? 'not-allowed' : 'pointer'
-                }}
               >
-                {saving ? "Salvando..." : "💾 Salvar Alterações"}
+                {saving ? "Salvando..." : " Salvar Alterações"}
               </button>
               
               <button 
@@ -501,7 +483,7 @@ export default function EditarPerfil() {
                 onClick={handleVoltar}
                 disabled={saving}
               >
-                ❌ Cancelar
+                Cancelar
               </button>
             </div>
           </form>
