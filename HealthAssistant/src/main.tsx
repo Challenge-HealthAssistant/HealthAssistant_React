@@ -10,7 +10,6 @@ import CodigoVerificacao from './routes/CodigodeVerificacao/index.tsx'
 import Cadastro from './routes/Cadastro/index.tsx'
 import Faq from './routes/Faq/index.tsx'
 import Login from './routes/Login/index.tsx'
-import LoginSenha from './routes/LoginComSenha/index.tsx'
 import QuemSomos from './routes/QuemSomos/index.tsx'
 import Agendar from './routes/Agendar/index.tsx'
 import Suporte from './routes/Suporte/index.tsx'
@@ -31,7 +30,6 @@ const router = createBrowserRouter([
    {path: '/cadastro', element: <Cadastro />},
    {path: '/faq', element: <Faq />},
    {path: '/login', element: <Login />},
-   {path: '/logincomsenha', element: <LoginSenha />},
    {path: '/quemsomos', element: <QuemSomos />},
    {path: '/agendar', element: <Agendar />},
    {path: '/suporte', element: <Suporte />},

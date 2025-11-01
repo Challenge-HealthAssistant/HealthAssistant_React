@@ -120,18 +120,7 @@ export default function Login() {
         >
           {carregando ? 'Entrando...' : 'Entrar'}
         </button>
-        <div className="login-divider">
-          <hr className="login-divider-line" />
-          <span className="login-divider-text">ou</span>
-          <hr className="login-divider-line" />
-        </div>
-        <button
-          type="button"
-          className="login-btn-secondary"
-          onClick={() => navigate("/logincomsenha")}
-        >
-          Entrar com senha
-        </button>
+
         <div className="login-signup-container">
           <button
             type="button"
