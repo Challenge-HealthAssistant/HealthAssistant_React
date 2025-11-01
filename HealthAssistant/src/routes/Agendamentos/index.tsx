@@ -192,38 +192,58 @@ export default function Agendamentos() {
         {!loading && !error && (
           <>
             {/* Próximas Consultas */}
-            <div className="agendamentos-card">
-              <div className="agendamentos-card-title">Próximas consultas</div>
+            <div className="agendamentos-section">
+              <h3 className="agendamentos-section-title">Próximas consultas</h3>
               {proximasConsultas.length > 0 ? (
-                proximasConsultas.map(consulta => (
-                  <div key={consulta.idConsulta} className="consulta-item">
-                    <div className="agendamentos-card-text">
-                      Data: {new Date(consulta.dataHora).toLocaleDateString('pt-BR')}<br />
-                      Horário: {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}<br />
-                      {consulta.tipo === 'online' ? 'Consulta Online (Telemedicina)' : 'Consulta Presencial'}<br />
-                      Status: Agendada
+                <div className="consultas-list">
+                  {proximasConsultas.map(consulta => (
+                    <div key={consulta.idConsulta} className="consulta-card">
+                      <div className="consulta-header">
+                        <div className="consulta-type-badge">
+                          {consulta.tipo === 'online' ? 'Online' : 'Presencial'}
+                        </div>
+                        <div className="consulta-actions">
+                          <button 
+                            onClick={() => handleEditClick(consulta)}
+                            className="btn-edit"
+                            title="Editar consulta"
+                          >
+                            <Edit />
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteClick(consulta.idConsulta)}
+                            className="btn-delete"
+                            title="Cancelar consulta"
+                          >
+                            <Cancel />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="consulta-info">
+                        <div className="consulta-date">
+                          <strong>Data:</strong> {new Date(consulta.dataHora).toLocaleDateString('pt-BR', {
+                            weekday: 'long',
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                          })}
+                        </div>
+                        <div className="consulta-time">
+                          <strong>Horário:</strong> {new Date(consulta.dataHora).toLocaleTimeString('pt-BR', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </div>
+                        <div className="consulta-status">
+                          <strong>Status:</strong> <span className="status-badge">Agendada</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="consulta-actions">
-                      <button 
-                        onClick={() => handleEditClick(consulta)}
-                        className="btn-edit"
-                        title="Editar consulta"
-                      >
-                        <Edit />
-                      </button>
-                      <button 
-                        onClick={() => handleDeleteClick(consulta.idConsulta)}
-                        className="btn-delete"
-                        title="Cancelar consulta"
-                      >
-                        <Cancel />
-                      </button>
-                    </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
-                <div className="agendamentos-card-text">
-                  Você não possui consultas agendadas
+                <div className="no-consultas-message">
+                  <p>Você não possui consultas agendadas</p>
                 </div>
               )}
             </div>
