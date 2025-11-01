@@ -420,6 +420,12 @@
     .perfil-error {
       @apply text-center text-red-600 font-semibold py-8;
     }
+    .perfil-input {
+      @apply w-full p-3 text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#1976a5] focus:border-transparent transition-all;
+    }
+    .perfil-input:disabled {
+      @apply bg-gray-100 cursor-not-allowed opacity-60;
+    }
     
     /* ----------------- */
     /* Login             */

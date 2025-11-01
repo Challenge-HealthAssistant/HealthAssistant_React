@@ -16,6 +16,7 @@ import Agendar from './routes/Agendar/index.tsx'
 import Suporte from './routes/Suporte/index.tsx'
 import Teleconsulta from './routes/Teleconsulta/index.tsx'
 import Perfil from './routes/Perfil/index.tsx'
+import EditarPerfil from './routes/EditarPerfil/index.tsx'
 import Resultados from './routes/Resultados/index.tsx'
 import Error from './routes/Error/index.tsx'
 
@@ -37,6 +38,8 @@ const router = createBrowserRouter([
    {path: '/teleconsulta', element: <Teleconsulta />},
    {path: '/perfil', element: <Perfil />},
    {path: '/perfil/:id', element: <Perfil />},
+   {path: '/editar-perfil', element: <EditarPerfil />},
+   {path: '/editar-perfil/:id', element: <EditarPerfil />},
    {path: '/resultados', element: <Resultados />},
   ]}
 ]);
