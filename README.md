@@ -97,8 +97,6 @@ Desenvolver uma interface **acessível, intuitiva e responsiva** para facilitar 
 | **React Router** | 6.26.2 | Roteamento e navegação SPA |
 | **Tailwind CSS** | - | Framework CSS para estilização responsiva |
 | **CSS3** | - | Estilização customizada e animações |
-| **Java REST API** | - | Backend para consumo de dados (localhost:8080) |
-| **Oracle Database** | - | Banco de dados com constraints e estrutura HC_ |
 | **Figma** | - | Protótipos e design system |
 
 ### 🛠️ Scripts Disponíveis
@@ -122,12 +120,12 @@ npm run lint
 ## 🚀 Funcionalidades Implementadas
 
 ### 🔐 Sistema de Autenticação
-- **Login Duplo**: CPF + Data de nascimento ou senha
+- **Login**: CPF + Data de nascimento  
 - **Verificação**: Código de 6 dígitos com validação
 - **Cadastro**: Registro de novos usuários
 - **Estado Persistente**: Dados salvos no localStorage
 
-### � Navegação e UX
+###   Navegação e UX
 - **Roteamento Dinâmico**: URLs amigáveis com React Router
 - **useParams**: Navegação entre perfis (ex: `/perfil/1`, `/perfil/2`)
 - **Botões Interativos**: Hover effects com troca de ícones
@@ -135,7 +133,7 @@ npm run lint
 
 ### 👥 Perfil de Usuários
 - **Perfil Dinâmico**: Visualização baseada em ID da URL
-- **Dados Simulados**: Sistema de usuários mockado
+- **Dados via Api Java**: Sistema de usuários da API Java
 - **Quem Somos**: Cards responsivos da equipe
 - **Layout Adaptável**: Design otimizado para mobile/desktop
 
@@ -146,20 +144,16 @@ npm run lint
 - **Reagendamento**: Funcionalidade de alteração de datas
 
 ### 📄 Resultados e Exames
-- **API Integration**: Consumo de dados via REST API Java (localhost:8080)
-- **Histórico Dinâmico**: Visualização de exames por ano com dados reais
-- **Interface Melhorada**: Cards com bordas coloridas e badges explicativos
-- **Resultados Claros**: "DETECTADO", "NÃO DETECTADO", "INCONCLUSIVO" com explicações
-- **Dados Completos**: ID, instituição, ficha médica, nome do paciente, data
-- **Loading States**: Estados de carregamento e tratamento de erros
-- **Cache System**: Sistema de cache para nomes de pacientes
+- **Histórico**: Visualização de exames por ano
+- **Cards Interativos**: Interface limpa e organizada
+- **Responsividade**: Layout otimizado para mobile
+- **Scroll Nativo**: Navegação suave em listas extensas
 
 ### 🤖 Suporte ao Cliente
-- **FAQ Atualizado**: 10 perguntas frequentes organizadas e relevantes
+- **FAQ Interativo**: Perguntas frequentes organizadas
 - **Central de Suporte**: Múltiplos canais de atendimento
 - **Chat Simulado**: Interface para assistente virtual
 - **Integração WhatsApp**: Botões para contato direto
-- **FAQs Práticos**: Respostas para remarcar consultas, cancelar exames, horários, etc.
 ---
 
 ---
@@ -189,7 +183,6 @@ npm run dev
 ```
 /                    → Página inicial (Home)
 /login               → Login com CPF/Data
-/login-senha         → Login com senha
 /verificacao         → Código de verificação
 /cadastro           → Cadastro de usuário
 /perfil/:id         → Perfil dinâmico (useParams)
@@ -229,23 +222,20 @@ HealthAssistant/
 │   │   ├── Cadastro/        # Registro de usuário
 │   │   ├── CodigodeVerificacao/ # Verificação 2FA
 │   │   ├── Error/           # Página de erro
-│   │   ├── Faq/             # Perguntas frequentes (10 FAQs atualizados)
+│   │   ├── Faq/             # Perguntas frequentes
 │   │   ├── Home/            # Página inicial
 │   │   ├── Login/           # Login CPF/Data
-│   │   ├── LoginComSenha/   # Login com senha
 │   │   ├── Perfil/          # Perfil do usuário
 │   │   ├── QuemSomos/       # Sobre a equipe
-│   │   ├── Resultados/      # Resultados de exames (API integrada)
+│   │   ├── Resultados/      # Resultados de exames
 │   │   ├── Suporte/         # Central de ajuda
 │   │   └── Teleconsulta/    # Consulta online
 │   ├── img/                 # Assets de imagens
-│   ├── data/                # APIs e funções de consumo
-│   │   └── api.ts           # Funções para consumo da API Java
+│   ├── data/                # Dados mockados
 │   ├── types/               # Tipos TypeScript
-│   │   └── tipoResultadoExame.ts # Interface para resultados de exames
 │   ├── App.tsx              # Componente principal
 │   ├── main.tsx             # Entry point
-│   ├── global.css           # Estilos globais (sem inline styles)
+│   ├── global.css           # Estilos globais
 │   └── vite-env.d.ts        # Tipos do Vite
 ├── package.json
 ├── tsconfig.json
@@ -258,15 +248,11 @@ HealthAssistant/
 ## 🎯 Destaques da Implementação
 
 ### 🛠️ Melhorias Técnicas Aplicadas
-- **API Integration**: Integração completa com backend Java via fetch API
-- **CSS Centralizado**: Migração completa de estilos inline para global.css
-- **TypeScript Interfaces**: Tipagem forte para dados de exames e pacientes
-- **Error Handling**: Tratamento robusto de erros e estados de carregamento
+- **CSS Centralizado**: Migração de estilos para global.css com classes reutilizáveis
 - **Mobile Optimization**: `calc(env(safe-area-inset-bottom) + 2rem)` para dispositivos iOS
 - **Scroll Management**: `h-screen` + `overflow-hidden/auto` para controle preciso
-- **State Management**: useState hooks para hover states e cache de dados
+- **State Management**: useState hooks para hover states nos botões interativos
 - **Icon System**: Troca dinâmica voltar.png ↔ voltarVerde.png
-- **UX Improvements**: Badges explicativos e textos mais claros para resultados
 
 ### 🔧 Padrões de Desenvolvimento
 - **Component Architecture**: Componentes funcionais com TypeScript
@@ -294,7 +280,7 @@ HealthAssistant/
 
 ---
 
-## � Entregáveis do Challenge
+##   Entregáveis do Challenge
 
 ### 📦 Componentes Avaliados
 - ✅ **Frontend React**: Interface completa e responsiva
@@ -315,13 +301,16 @@ HealthAssistant/
 ## 🚀 Próximos Passos
 
 ### 🔮 Roadmap Futuro
-- ✅ **Backend Java**: API REST para resultados de exames (IMPLEMENTADO)
-- 🔗 **Expansão APIs**: Consultas, agendamentos e perfil via backend
+- 🔗 **Integração Backend**: APIs Java/Python para persistência
 - 📱 **App Mobile**: Versão nativa iOS/Android
 - 🤖 **Chatbot**: Assistente virtual com IA
 - 📧 **Notificações**: SMS e WhatsApp automáticos
 - 🔐 **Segurança**: Implementação LGPD completa
--
+
+## Integrações 
+- 🔗 **Integração Backend**: APIs Java/Python para persistência
+- 📧 **Notificações**: SMS e WhatsApp automáticos - realizada na materia de Python
+
 
 ### 🏥 Implementação Real
 - Testes piloto com pacientes reais do HC
@@ -333,7 +322,7 @@ HealthAssistant/
 
 ## 📌 Observações Importantes
 
-- � **Status**: Projeto acadêmico em desenvolvimento para o Challenge FIAP 2025
+-   **Status**: Projeto acadêmico em desenvolvimento para o Challenge FIAP 2025
 - 🔗 **APIs**: Integração com serviços reais será implementada em fases futuras
 - 📱 **Dados**: Sistema utiliza dados mockados para demonstração das funcionalidades
 - 🎯 **Foco**: Prioridade na experiência do usuário e acessibilidade para terceira idade
