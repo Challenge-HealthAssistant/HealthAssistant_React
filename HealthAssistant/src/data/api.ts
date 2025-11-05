@@ -190,3 +190,54 @@ export async function getResultadosByPacienteId(idPaciente: number): Promise<tip
 
   return await response.json();
 }
+
+// ========================================
+// AUTENTICAÇÃO E CADASTRO
+// ========================================
+
+// Login de paciente
+export async function loginPaciente(cpf: string, dataNascimento: string) {
+  const response = await fetch(`${API_BASE_URL}/pacientes/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      cpf: cpf.replace(/\D/g, ""), // remove pontos e traços
+      dataNascimento: dataNascimento.split("/").reverse().join("-"), // DD/MM/YYYY -> YYYY-MM-DD
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Erro no login (status ${response.status}): ${errorText}`);
+  }
+
+  return await response.json();
+}
+
+// Cadastro de paciente
+export async function cadastrarPaciente(pacienteData: {
+  nome: string;
+  cpf: string;
+  dataNascimento: string;
+  telefone: string;
+  email: string;
+  possuiCuidador?: boolean;
+}) {
+  const response = await fetch(`${API_BASE_URL}/pacientes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(pacienteData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Erro no cadastro (status ${response.status}): ${errorText}`);
+  }
+
+  return await response.json();
+}

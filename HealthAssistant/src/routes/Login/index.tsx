@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginPaciente } from "../../data/api";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -51,27 +52,14 @@ export default function Login() {
   setCarregando(true);
 
   try {
-    const response = await fetch("https://hc-assistant.onrender.com/pacientes/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cpf: cpf.replace(/\D/g, ""), // remove pontos e traços
-        dataNascimento: dataNascimento.split("/").reverse().join("-"), // de DD/MM/AAAA para AAAA-MM-DD
-      }),
-    });
-
-    if (response.ok) {
-      const paciente = await response.json();
-      localStorage.setItem("pacienteLogadoId", paciente.idPaciente.toString());
-      localStorage.setItem("pacienteLogadoNome", paciente.nome);
-      navigate("/codigodeverificacao");
-    } else {
-      setErro("CPF ou data de nascimento incorretos. Tente novamente.");
-    }
-  } catch {
-    setErro("Erro de conexão com o servidor.");
+    const paciente = await loginPaciente(cpf, dataNascimento);
+    
+    localStorage.setItem("pacienteLogadoId", paciente.idPaciente.toString());
+    localStorage.setItem("pacienteLogadoNome", paciente.nome);
+    navigate("/codigodeverificacao");
+  } catch (error) {
+    console.error("Erro no login:", error);
+    setErro("CPF ou data de nascimento incorretos. Tente novamente.");
   } finally {
     setCarregando(false);
   }
