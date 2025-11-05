@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cadastrarPaciente } from "../../data/api";
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -120,23 +121,13 @@ export default function Cadastro() {
         email: email.trim().toLowerCase(),
       };
 
-      const response = await fetch("http://localhost:8080/pacientes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(novoPaciente),
-      });
+      const data = await cadastrarPaciente(novoPaciente);
 
-      if (response.ok) {
-        const data = await response.json();
+      setErro("");
+      setSucesso("Cadastro realizado com sucesso!");
 
-        setErro("");
-        setSucesso("Cadastro realizado com sucesso!");
-
-        // Salva dados
-        localStorage.setItem("pacienteLogadoId", data.idPaciente.toString());
+      // Salva dados
+      localStorage.setItem("pacienteLogadoId", data.idPaciente.toString());
         localStorage.setItem("pacienteLogadoNome", data.nome);
 
         // Limpa campos
@@ -147,25 +138,9 @@ export default function Cadastro() {
         setEmail("");
 
         setTimeout(() => navigate("/codigodeverificacao"), 2000);
-        
-      } else {
-        const errorText = await response.text();
-        
-        //  Tratamento mais específico baseado no seu backend
-        if (response.status === 400) {
-          if (errorText.includes("CPF ou e-mail já cadastrados")) {
-            setErro("CPF ou e-mail já cadastrados no sistema.");
-          } else if (errorText.includes("formato inválido")) {
-            setErro("CPF ou telefone em formato inválido.");
-          } else {
-            setErro("Dados inválidos. Verifique os campos.");
-          }
-        } else {
-          setErro(`Erro ${response.status}: ${errorText}`);
-        }
-      }
-    } catch {
-      setErro("Falha ao conectar com o servidor.");
+    } catch (error) {
+      console.error("Erro no cadastro:", error);
+      setErro("Erro ao realizar cadastro. Tente novamente.");
     } finally {
       setCarregando(false);
     }
