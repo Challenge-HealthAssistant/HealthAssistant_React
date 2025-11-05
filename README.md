@@ -311,7 +311,19 @@ HealthAssistant/
 - 🔗 **Integração Backend**: APIs Java/Python para persistência
 - 📧 **Notificações**: WhatsApp automáticos - realizada na materia de Python
 
-
+## API Java
+- Link da aplicação publicada na render:https://hc-assistant.onrender.com
+### **EndsPoints**
+ - /pacientes
+ - /cuidadores
+ - /consultas
+ - /resultadoExame/{id}
+ - /atendimento/{id}
+ - /faq
+ - /notificacao/{id}
+ - /login
+ - /suporte
+ 
 ## 📱 API WhatsApp - Integração Z.API + N8N
 
 ### 📋 **Sobre a Integração**
@@ -399,8 +411,5 @@ curl --request POST \
 ## 📌 Observações Importantes
 
 -   **Status**: Projeto acadêmico em desenvolvimento para o Challenge FIAP 2025
-- 🔗 **APIs**: Integração com serviços reais será implementada em fases futuras
-- 📱 **Dados**: Sistema utiliza dados mockados para demonstração das funcionalidades
 - 🎯 **Foco**: Prioridade na experiência do usuário e acessibilidade para terceira idade
-- 🏆 **Objetivo**: Competição acadêmica com potencial de implementação real no HC
 
