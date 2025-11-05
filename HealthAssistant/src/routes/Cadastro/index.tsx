@@ -120,7 +120,7 @@ export default function Cadastro() {
         email: email.trim().toLowerCase(),
       };
 
-      const response = await fetch("http://localhost:8080/pacientes", {
+      const response = await fetch("https://hc-assistant.onrender.com/pacientes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

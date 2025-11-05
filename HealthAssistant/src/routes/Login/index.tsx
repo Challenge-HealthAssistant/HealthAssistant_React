@@ -51,7 +51,7 @@ export default function Login() {
   setCarregando(true);
 
   try {
-    const response = await fetch("http://localhost:8080/pacientes/login", {
+    const response = await fetch("https://hc-assistant.onrender.com/pacientes/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

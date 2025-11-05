@@ -3,7 +3,7 @@ import type { tipoCuidador } from "../types/tipoCuidador";
 import type { tipoConsulta } from "../types/tipoConsulta";
 import type { tipoResultadoExame } from "../types/tipoResultadoExame";
 
-export const API_BASE_URL = "http://localhost:8080"; 
+export const API_BASE_URL = "https://hc-assistant.onrender.com"; 
 
 export async function getPacienteById(id: number) {
   const response = await fetch(`${API_BASE_URL}/pacientes/${id}`);
