@@ -311,6 +311,10 @@ HealthAssistant/
 - 🔗 **Integração Backend**: APIs Java/Python para persistência
 - 📧 **Notificações**: WhatsApp automáticos - realizada na materia de Python
 
+# Aplicação Web Vercel
+ -> Sistema publicado na vercel 
+ - url do sistema publicado na Vercel: https://health-assistant-pearl.vercel.app/
+
 ## API Java
 - Link da aplicação publicada na render:https://hc-assistant.onrender.com
 ### **EndsPoints**
