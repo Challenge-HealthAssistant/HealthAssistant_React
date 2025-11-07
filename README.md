@@ -61,7 +61,7 @@ Desenvolvimento de uma interface **acessível, intuitiva e responsiva** que faci
 | **Arthur Silvera** | RM562310 | 1TDSPH | [@arthur-silvera](https://github.com/arthur-silvera) | [LinkedIn](https://linkedin.com/in/arthur-silvera) |
 
 ### 📺 Apresentação do Projeto
-**Vídeo Demonstrativo**: [https://youtu.be/afc2MyIILwQ](https://youtu.be/afc2MyIILwQ)
+**Vídeo Demonstrativo**: [https://youtu.be/TvxqhmDzHbM]
 
 ### 🏆 Metodologia Challenge
 - **Abordagem**: Design Thinking
@@ -311,12 +311,13 @@ HealthAssistant/
 - 🔗 **Integração Backend**: APIs Java/Python para persistência
 - 📧 **Notificações**: WhatsApp automáticos - realizada na materia de Python
 
-# Aplicação Web Vercel
+### Aplicação Web Vercel
  -> Sistema publicado na vercel 
  - url do sistema publicado na Vercel: https://health-assistant-pearl.vercel.app/
 
-## API Java
+### API Java
 - Link da aplicação publicada na render:https://hc-assistant.onrender.com
+
 ### **EndsPoints**
  - /pacientes
  - /cuidadores
